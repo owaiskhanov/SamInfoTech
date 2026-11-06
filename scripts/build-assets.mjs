@@ -57,66 +57,46 @@ async function buildPhotos() {
 
 /* ——————————————————————————————— 2. brand mark ——————————————————————————————— */
 
-const markInner = (grad = "g") => `
-  <path d="M24 2.6 42.4 13v22L24 45.4 5.6 35V13L24 2.6Z"
-        fill="url(#${grad})" fill-opacity="0.14" stroke="url(#${grad})"
-        stroke-width="1.8" stroke-linejoin="round"/>
-  <path d="M24 8.4 36.6 15.6v16.8L24 39.6 11.4 32.4V15.6L24 8.4Z"
-        stroke="url(#${grad})" stroke-opacity="0.45" stroke-width="1" stroke-linejoin="round"/>
-  <path d="M29.6 18.6c-1-1.5-2.9-2.4-5.3-2.4-3.3 0-5.6 1.8-5.6 4.5 0 2.6 2.1 3.8 5.4 4.5 3 .6 4.4 1.4 4.4 3.1 0 1.6-1.5 2.7-3.9 2.7-2.2 0-4-1-4.9-2.7"
-        stroke="url(#${grad})" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="33.4" cy="16.4" r="1.7" fill="#67E8F9"/>
+const MARK = `
+  <path d="M20 2.4 34.8 11v17.6L20 37.2 5.2 28.6V11L20 2.4Z"
+        fill="none" stroke="#35C6DC" stroke-width="1.4" stroke-linejoin="round"/>
+  <path d="M24.6 15.4c-.9-1.3-2.5-2.1-4.6-2.1-2.9 0-4.9 1.6-4.9 3.9 0 2.3 1.8 3.3 4.7 3.9 2.6.6 3.8 1.2 3.8 2.7 0 1.4-1.3 2.4-3.4 2.4-1.9 0-3.5-.9-4.3-2.4"
+        fill="none" stroke="#35C6DC" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="27.9" cy="13.4" r="1.5" fill="#35C6DC"/>
 `;
 
-const defs = `
-  <defs>
-    <linearGradient id="g" x1="8" y1="4" x2="40" y2="44" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#67E8F9"/><stop offset="0.52" stop-color="#22D3EE"/><stop offset="1" stop-color="#3B82F6"/>
-    </linearGradient>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#0A152A"/><stop offset="1" stop-color="#050B18"/>
-    </linearGradient>
-  </defs>
-`;
-
-const markSimple = (grad = "g") => `
-  <path d="M24 2.6 42.4 13v22L24 45.4 5.6 35V13L24 2.6Z"
-        fill="url(#${grad})" fill-opacity="0.18" stroke="url(#${grad})"
-        stroke-width="2.4" stroke-linejoin="round"/>
-  <path d="M30 18.2c-1.2-1.7-3.3-2.7-6-2.7-3.8 0-6.4 2.1-6.4 5.2 0 3 2.4 4.3 6.1 5.1 3.4.7 5 1.6 5 3.5 0 1.8-1.7 3.1-4.4 3.1-2.5 0-4.5-1.1-5.5-3"
-        stroke="url(#${grad})" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="34.4" cy="15.6" r="2.2" fill="#67E8F9"/>
-`;
-
-const iconSvgSimple = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  ${defs}
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#22D3EE" stroke-opacity="0.28"/>
-  <g transform="translate(8 8)">${markSimple("g")}</g>
-</svg>`;
-
-// maskable icons need their content inside the central 80% safe circle
-const maskableSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  ${defs}
-  <rect width="64" height="64" fill="#050B18"/>
-  <g transform="translate(12.8 12.8) scale(0.8)">${markInner("g")}</g>
-</svg>`;
-
+/** Flat, gradient-free wordmark tile used for every favicon size. */
 const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  ${defs}
-  <rect width="64" height="64" rx="14" fill="url(#bg)"/>
-  <rect x="0.5" y="0.5" width="63" height="63" rx="13.5" fill="none" stroke="#22D3EE" stroke-opacity="0.28"/>
-  <g transform="translate(8 8)">${markInner("g")}</g>
+  <rect width="64" height="64" rx="12" fill="#080B12"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="11.5" fill="none" stroke="#262F3D"/>
+  <g transform="translate(12 12)">${MARK}</g>
 </svg>`;
 
-const markOnlySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
-  ${defs}${markInner("g")}
+/** Bolder variant that survives 16–32px rasterisation. */
+const iconSvgSimple = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="10" fill="#080B12"/>
+  <g transform="translate(11 11) scale(1.05)">
+    <path d="M20 2.4 34.8 11v17.6L20 37.2 5.2 28.6V11L20 2.4Z"
+          fill="none" stroke="#35C6DC" stroke-width="2.6" stroke-linejoin="round"/>
+    <path d="M24.6 15.4c-.9-1.3-2.5-2.1-4.6-2.1-2.9 0-4.9 1.6-4.9 3.9 0 2.3 1.8 3.3 4.7 3.9 2.6.6 3.8 1.2 3.8 2.7 0 1.4-1.3 2.4-3.4 2.4-1.9 0-3.5-.9-4.3-2.4"
+          fill="none" stroke="#35C6DC" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="27.9" cy="13.4" r="2.4" fill="#35C6DC"/>
+  </g>
 </svg>`;
 
-// Safari pinned-tab needs a single-colour silhouette
-const pinnedSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
-  <path d="M24 2.6 42.4 13v22L24 45.4 5.6 35V13L24 2.6Zm0 5.8L11.4 15.6v16.8L24 39.6l12.6-7.2V15.6L24 8.4Z" fill="#000"/>
-  <path d="M29.6 18.6c-1-1.5-2.9-2.4-5.3-2.4-3.3 0-5.6 1.8-5.6 4.5 0 2.6 2.1 3.8 5.4 4.5 3 .6 4.4 1.4 4.4 3.1 0 1.6-1.5 2.7-3.9 2.7-2.2 0-4-1-4.9-2.7v3.4c1.1 1.3 2.9 2.1 5 2.1 3.4 0 5.7-1.9 5.7-4.7 0-2.6-2-3.9-5.4-4.6-3-.6-4.4-1.3-4.4-2.9 0-1.5 1.4-2.5 3.8-2.5 2 0 3.6.8 4.5 2.2Z" fill="#000"/>
+/** Maskable icon: mark kept inside the central 80% safe zone. */
+const maskableSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" fill="#080B12"/>
+  <g transform="translate(12.8 12.8) scale(0.8)">${MARK}</g>
+</svg>`;
+
+/** Transparent mark, used inside the social card. */
+const markOnlySvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">${MARK}</svg>`;
+
+/** Safari pinned-tab silhouette: single flat colour. */
+const pinnedSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" width="40" height="40">
+  <path d="M20 1.6 35.6 10.6v18.8L20 38.4 4.4 29.4V10.6L20 1.6Zm0 2.9L7 11.7v16.6l13 7.2 13-7.2V11.7L20 4.5Z" fill="#000"/>
+  <path d="M25.9 15.9c-1-1.4-2.7-2.3-5-2.3-3.2 0-5.4 1.8-5.4 4.3 0 2.5 2 3.6 5.2 4.3 2.9.6 4.2 1.3 4.2 3 0 1.5-1.4 2.6-3.7 2.6-2.1 0-3.9-1-4.7-2.6v3.3c1.1 1.2 2.8 2 4.8 2 3.3 0 5.5-1.8 5.5-4.5 0-2.5-1.9-3.7-5.2-4.4-2.9-.6-4.2-1.2-4.2-2.8 0-1.4 1.3-2.4 3.6-2.4 1.9 0 3.4.8 4.3 2.1Z" fill="#000"/>
 </svg>`;
 
 const svgToPng = async (svg, width) => {
@@ -151,10 +131,8 @@ async function buildIcons() {
 
   // apple touch icon: no transparency, brand-dark background, slightly inset mark
   const appleSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
-    ${defs}
-    <rect width="180" height="180" fill="#050B18"/>
-    <circle cx="90" cy="70" r="80" fill="#22D3EE" fill-opacity="0.10"/>
-    <g transform="translate(30 30) scale(2.5)">${markInner("g")}</g>
+    <rect width="180" height="180" fill="#080B12"/>
+    <g transform="translate(34 34) scale(2.8)">${MARK}</g>
   </svg>`;
   await writeFile(
     path.join(PUB, "apple-touch-icon.png"),
@@ -172,8 +150,8 @@ async function buildIcons() {
           "IT solutions, cloud and security provider based in Mumbai, India. Since 2000.",
         start_url: "/",
         display: "standalone",
-        background_color: "#050b18",
-        theme_color: "#050b18",
+        background_color: "#080B12",
+        theme_color: "#080B12",
         icons: [
           { src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
           { src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
@@ -192,7 +170,7 @@ async function buildIcons() {
   <msapplication>
     <tile>
       <square150x150logo src="/android-chrome-192x192.png"/>
-      <TileColor>#050b18</TileColor>
+      <TileColor>#080B12</TileColor>
     </tile>
   </msapplication>
 </browserconfig>
@@ -236,11 +214,11 @@ async function loadFont(woffPath) {
 }
 
 async function buildOg() {
-  const soraBold = await loadFont(
-    path.join(root, "node_modules/@fontsource-variable/sora/files/sora-latin-wght-normal.woff2"),
+  const interTight = await loadFont(
+    path.join(root, "node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2"),
   );
-  const manrope = await loadFont(
-    path.join(root, "node_modules/@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2"),
+  const inter = await loadFont(
+    path.join(root, "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"),
   );
 
   const hero = await sharp(path.join(IMG, "hero-security.webp"))
@@ -251,7 +229,7 @@ async function buildOg() {
   const heroUri = `data:image/jpeg;base64,${hero.toString("base64")}`;
 
   // satori will not rasterise a nested <svg> image, so pre-render the mark to PNG
-  const markPng = await svgToPng(markOnlySvg, 124);
+  const markPng = await svgToPng(markOnlySvg, 104);
   const markUri = `data:image/png;base64,${markPng.toString("base64")}`;
 
   const el = (style, children) => ({
@@ -263,189 +241,147 @@ async function buildOg() {
     {
       width: "1200px",
       height: "630px",
-      background: "#050B18",
+      background: "#080B12",
       position: "relative",
-      overflow: "hidden",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      padding: "58px 64px 54px",
+      boxSizing: "border-box",
     },
     [
-      // backdrop orbs
-      el(
-        {
-          position: "absolute",
-          width: "720px",
-          height: "720px",
-          left: "-260px",
-          top: "-300px",
-          borderRadius: "9999px",
-          background: "radial-gradient(circle, rgba(34,211,238,0.28), rgba(5,11,24,0) 68%)",
-        },
-        [],
-      ),
-      el(
-        {
-          position: "absolute",
-          width: "620px",
-          height: "620px",
-          left: "300px",
-          bottom: "-420px",
-          borderRadius: "9999px",
-          background: "radial-gradient(circle, rgba(59,130,246,0.22), rgba(5,11,24,0) 70%)",
-        },
-        [],
-      ),
-      // hero art, right side, fading into the background
+      // flat photo panel on the right with a hairline edge
       el(
         {
           position: "absolute",
           right: "0px",
           top: "0px",
-          width: "620px",
+          width: "520px",
           height: "630px",
           overflow: "hidden",
+          borderLeft: "1px solid #262F3D",
         },
         [
           {
             type: "img",
             props: {
               src: heroUri,
-              width: 620,
+              width: 520,
               height: 630,
-              style: { objectFit: "cover", objectPosition: "70% 50%", opacity: 0.85 },
+              style: { objectFit: "cover", objectPosition: "72% 50%" },
             },
           },
           el(
             {
               position: "absolute",
               inset: "0px",
-              background:
-                "linear-gradient(90deg, #050B18 0%, rgba(5,11,24,0.72) 26%, rgba(5,11,24,0.12) 62%, rgba(5,11,24,0.55) 100%)",
+              backgroundColor: "rgba(8,11,18,0.45)",
             },
             [],
           ),
         ],
       ),
-      // content
-      el(
-        {
-          position: "relative",
-          flexDirection: "column",
-          justifyContent: "space-between",
-          width: "1200px",
-          height: "630px",
-          padding: "56px 64px 52px",
-          boxSizing: "border-box",
-        },
-        [
-          // brand row
-          el({ alignItems: "center", gap: "18px" }, [
-            { type: "img", props: { src: markUri, width: 62, height: 62 } },
-            el({ flexDirection: "column" }, [
-              el(
-                {
-                  fontFamily: "Sora",
-                  fontSize: "26px",
-                  fontWeight: 700,
-                  letterSpacing: "-0.02em",
-                  color: "#FFFFFF",
-                },
-                "SAM INFOSYSTEMS",
-              ),
-              el(
-                {
-                  fontFamily: "Manrope",
-                  fontSize: "13px",
-                  fontWeight: 600,
-                  letterSpacing: "0.34em",
-                  color: "#67E8F9",
-                  marginTop: "6px",
-                },
-                "PVT LTD  ·  SINCE 2000",
-              ),
-            ]),
-          ]),
 
-          // headline
-          el({ flexDirection: "column", maxWidth: "700px" }, [
-            el(
-              {
-                fontFamily: "Sora",
-                fontSize: "18px",
-                fontWeight: 600,
-                letterSpacing: "0.28em",
-                color: "#8EA0C0",
-                marginBottom: "20px",
-              },
-              "MUMBAI  ·  INDIA",
-            ),
-            el(
-              {
-                fontFamily: "Sora",
-                fontSize: "66px",
-                fontWeight: 700,
-                lineHeight: 1.06,
-                letterSpacing: "-0.035em",
-                color: "#FFFFFF",
-              },
-              "IT solutions,",
-            ),
-            el(
-              {
-                fontFamily: "Sora",
-                fontSize: "66px",
-                fontWeight: 700,
-                lineHeight: 1.06,
-                letterSpacing: "-0.035em",
-                backgroundImage: "linear-gradient(100deg,#A5F3FC 0%,#38BDF8 48%,#60A5FA 100%)",
-                backgroundClip: "text",
-                color: "transparent",
-              },
-              "cloud & security.",
-            ),
-            el(
-              {
-                fontFamily: "Manrope",
-                fontSize: "23px",
-                fontWeight: 500,
-                lineHeight: 1.5,
-                color: "#B9C8E4",
-                marginTop: "22px",
-                maxWidth: "560px",
-              },
-              "Architecting, deploying and supporting enterprise technology since 2000.",
-            ),
-          ]),
+      // brand row
+      el({ alignItems: "center", gap: "15px", width: "580px" }, [
+        { type: "img", props: { src: markUri, width: 48, height: 48 } },
+        el({ flexDirection: "column" }, [
+          el(
+            {
+              fontFamily: "InterTight",
+              fontSize: "23px",
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+              color: "#F6F8FB",
+            },
+            "Sam Infosystems",
+          ),
+          el(
+            {
+              fontFamily: "Inter",
+              fontSize: "10px",
+              fontWeight: 400,
+              letterSpacing: "0.3em",
+              color: "#66707F",
+              marginTop: "8px",
+            },
+            "PVT LTD  ·  SINCE 2000",
+          ),
+        ]),
+      ]),
 
-          // footer row
-          el({ alignItems: "center", justifyContent: "space-between", width: "1072px" }, [
-            el({ alignItems: "center", gap: "14px" }, [
-              el(
-                {
-                  fontFamily: "Manrope",
-                  fontSize: "19px",
-                  fontWeight: 700,
-                  color: "#FFFFFF",
-                  padding: "12px 22px",
-                  borderRadius: "9999px",
-                  backgroundImage: "linear-gradient(135deg,#67E8F9,#38BDF8 55%,#60A5FA)",
-                },
-                "saminfosystems.com",
-              ),
-            ]),
-            el({ alignItems: "center", gap: "10px" }, [
-              el({ width: "8px", height: "8px", borderRadius: "9999px", background: "#34D399" }, []),
-              el(
-                {
-                  fontFamily: "Manrope",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  color: "#8EA0C0",
-                },
-                "+91 98215 34588  ·  info@saminfosystems.com",
-              ),
-            ]),
-          ]),
-        ],
-      ),
+      // headline
+      el({ flexDirection: "column", maxWidth: "580px" }, [
+        el(
+          {
+            fontFamily: "Inter",
+            fontSize: "14px",
+            fontWeight: 500,
+            letterSpacing: "0.26em",
+            color: "#8590A3",
+            marginBottom: "20px",
+          },
+          "MUMBAI · INDIA",
+        ),
+        el(
+          {
+            fontFamily: "InterTight",
+            fontSize: "62px",
+            fontWeight: 300,
+            lineHeight: 1.05,
+            letterSpacing: "-0.04em",
+            color: "#F6F8FB",
+          },
+          "IT solutions,",
+        ),
+        el(
+          {
+            fontFamily: "InterTight",
+            fontSize: "62px",
+            fontWeight: 300,
+            lineHeight: 1.05,
+            letterSpacing: "-0.04em",
+            color: "#6FDCEA",
+          },
+          "cloud & security.",
+        ),
+        el(
+          {
+            fontFamily: "Inter",
+            fontSize: "19px",
+            fontWeight: 300,
+            lineHeight: 1.5,
+            color: "#AAB5C6",
+            marginTop: "22px",
+            maxWidth: "460px",
+          },
+          "Architecting, deploying and supporting enterprise technology since 2000.",
+        ),
+      ]),
+
+      // footer row
+      el({ alignItems: "center", width: "1030px", gap: "18px" }, [
+        el(
+          {
+            fontFamily: "Inter",
+            fontSize: "15px",
+            fontWeight: 500,
+            color: "#04222A",
+            padding: "10px 18px",
+            borderRadius: "6px",
+            backgroundColor: "#6FDCEA",
+          },
+          "saminfosystems.com",
+        ),
+        el(
+          {
+            fontFamily: "Inter",
+            fontSize: "14px",
+            fontWeight: 300,
+            color: "#66707F",
+          },
+          "+91 98215 34588  ·  info@saminfosystems.com",
+        ),
+      ]),
     ],
   );
 
@@ -453,12 +389,11 @@ async function buildOg() {
     width: 1200,
     height: 630,
     fonts: [
-      { name: "Sora", data: soraBold, weight: 600, style: "normal" },
-      { name: "Sora", data: soraBold, weight: 700, style: "normal" },
-      { name: "Manrope", data: manrope, weight: 400, style: "normal" },
-      { name: "Manrope", data: manrope, weight: 500, style: "normal" },
-      { name: "Manrope", data: manrope, weight: 600, style: "normal" },
-      { name: "Manrope", data: manrope, weight: 700, style: "normal" },
+      { name: "InterTight", data: interTight, weight: 300, style: "normal" },
+      { name: "InterTight", data: interTight, weight: 500, style: "normal" },
+      { name: "Inter", data: inter, weight: 300, style: "normal" },
+      { name: "Inter", data: inter, weight: 400, style: "normal" },
+      { name: "Inter", data: inter, weight: 500, style: "normal" },
     ],
   });
 

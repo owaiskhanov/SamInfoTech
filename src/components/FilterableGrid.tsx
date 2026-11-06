@@ -22,17 +22,17 @@ export function FilterableGrid({
 
   return (
     <div>
-      <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter products by category">
+      <div className="flex flex-wrap items-center gap-2" role="tablist" aria-label="Filter by category">
         {tabs.map((t) => (
           <button
             key={t.key}
             role="tab"
             aria-selected={active === t.key}
             onClick={() => setActive(t.key)}
-            className={`rounded-full px-4 py-2 font-display text-[0.78rem] font-semibold transition-all ${
+            className={`rounded px-3.5 py-1.5 text-[0.78rem] font-normal transition-colors ${
               active === t.key
-                ? "bg-brand-400 text-ink-950 shadow-glow"
-                : "border border-white/10 text-mist-400 hover:border-brand-400/40 hover:text-white"
+                ? "bg-brand-300 text-ink-950"
+                : "border border-line text-mist-400 hover:border-line-strong hover:text-mist-100"
             }`}
           >
             {t.label}
@@ -40,19 +40,19 @@ export function FilterableGrid({
         ))}
       </div>
 
-      <div className="mt-7 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <div className="mt-6 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {shown.map((item) => (
           <ServiceCard key={item.slug} item={item} />
         ))}
       </div>
 
-      <div className="mt-8 flex justify-center">
+      <div className="mt-7">
         <Link
           href="/products"
-          className="group inline-flex items-center gap-2 font-display text-[0.82rem] font-semibold text-brand-300 transition-colors hover:text-brand-200"
+          className="group inline-flex items-center gap-1.5 text-[0.82rem] font-normal text-mist-300 transition-colors hover:text-brand-300"
         >
           See every product &amp; service
-          <Icon name="arrow-right" size={15} className="transition-transform group-hover:translate-x-0.5" />
+          <Icon name="arrow-right" size={14} className="transition-transform group-hover:translate-x-0.5" />
         </Link>
       </div>
     </div>

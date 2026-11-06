@@ -352,7 +352,7 @@ export const items: Item[] = [
     name: "CorelDRAW Graphics Suite X7",
     eyebrow: "PRODUCTS",
     category: "products",
-    icon: "corel",
+    icon: "coreldraw",
     accent: "#facc15",
     excerpt:
       "CorelDRAW is a vector graphics editor developed and marketed by Corel Corporation.",
@@ -424,7 +424,7 @@ export const items: Item[] = [
     name: "Google Workspace",
     eyebrow: "PRODUCTS",
     category: "products",
-    icon: "google",
+    icon: "googleworkspace",
     accent: "#34d399",
     excerpt:
       "Google Workspace is a cloud-based productivity suite that includes Gmail, Google Drive, Docs, Sheets, Meet, and more.",

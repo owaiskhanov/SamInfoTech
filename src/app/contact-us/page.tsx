@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { QuoteForm } from "@/components/QuoteForm";
+import { Reveal } from "@/components/Reveal";
 import { Breadcrumbs, SectionHeading } from "@/components/ui";
 import { Icon } from "@/components/Icon";
 import { company } from "@/lib/site";
@@ -85,46 +86,44 @@ const channels = [
 export default function ContactPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-white/[0.07] pb-16 pt-10 lg:pb-20 lg:pt-12">
-        <div className="orb -left-28 -top-24 h-96 w-96 bg-brand-500/15" aria-hidden="true" />
-        <div className="absolute inset-0 grid-lines opacity-30" aria-hidden="true" />
-        <div className="container-x relative">
+      <section className="border-b border-line">
+        <div className="container-x pb-14 pt-8 lg:pb-16 lg:pt-10">
           <Breadcrumbs trail={[{ label: "Contact Us" }]} />
-          <div className="mt-10 grid gap-12 lg:grid-cols-[1fr_1.02fr] lg:items-start">
-            <div>
+          <div className="mt-8 grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-start lg:gap-14">
+            <Reveal>
               <p className="eyebrow">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                <span className="h-px w-5 bg-brand-400" aria-hidden="true" />
                 Contact Us
               </p>
-              <h1 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.2rem)] font-bold leading-[1.05] tracking-[-0.035em] text-white">
+              <h1 className="mt-4 font-display text-[clamp(1.95rem,4.4vw,3.1rem)] font-light leading-[1.05] tracking-[-0.035em] text-mist-50">
                 Reach out to us —{" "}
-                <span className="text-gradient">we answer like engineers.</span>
+                <span className="text-brand-300">we answer like engineers.</span>
               </h1>
-              <p className="mt-5 max-w-lg text-[1rem] leading-relaxed text-mist-300">
+              <p className="mt-5 max-w-lg text-[0.95rem] font-light leading-relaxed text-mist-400">
                 Call, email or drop by the Goregaon West office. Every enquiry is read by a person
                 who can actually scope the work.
               </p>
 
-              <div className="mt-9 grid gap-3 sm:grid-cols-2">
+              <div className="mt-8 grid grid-cols-1 gap-3 min-[420px]:grid-cols-2">
                 {channels.map((c) => (
                   <a
                     key={c.label}
                     href={c.href}
                     target={c.external ? "_blank" : undefined}
                     rel={c.external ? "noopener noreferrer" : undefined}
-                    className="group flex items-start gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 transition-all hover:border-brand-400/40 hover:bg-white/[0.04]"
+                    className="card group flex items-start gap-3 rounded-lg p-4"
                   >
-                    <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-brand-400/25 bg-brand-400/10 text-brand-300">
-                      <Icon name={c.icon} size={16} />
+                    <span className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded border border-line text-brand-300">
+                      <Icon name={c.icon} size={14} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block font-display text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-mist-500">
+                      <span className="block text-[0.62rem] font-medium uppercase tracking-[0.14em] text-mist-500">
                         {c.label}
                       </span>
-                      <span className="mt-1 block break-words font-display text-[0.88rem] font-semibold text-white">
+                      <span className="mt-1 block break-words font-display text-[0.85rem] font-normal text-mist-100">
                         {c.value}
                       </span>
-                      <span className="mt-1 block text-[0.75rem] leading-snug text-mist-500">
+                      <span className="mt-1 block text-[0.72rem] font-light leading-snug text-mist-500">
                         {c.note}
                       </span>
                     </span>
@@ -132,11 +131,11 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              <div className="mt-6 rounded-xl border border-white/[0.08] bg-ink-900/60 p-5">
-                <p className="font-display text-[0.64rem] font-semibold uppercase tracking-[0.16em] text-mist-500">
+              <div className="mt-3 rounded-lg border border-line bg-ink-900 p-5">
+                <p className="text-[0.62rem] font-medium uppercase tracking-[0.14em] text-mist-500">
                   Office address
                 </p>
-                <address className="mt-2 text-[0.9rem] leading-relaxed not-italic text-mist-300">
+                <address className="mt-2 text-[0.86rem] font-light leading-relaxed not-italic text-mist-300">
                   101-102, Neminath Square, Ram Mandir Signal,
                   <br />
                   Swami Vivekananda Rd, Goregaon West,
@@ -147,45 +146,42 @@ export default function ContactPage() {
                   href={`https://www.google.com/maps/search/?api=1&query=${company.address.mapQuery}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 font-display text-[0.78rem] font-semibold text-brand-300 transition-colors hover:text-brand-200"
+                  className="mt-3 inline-flex items-center gap-1.5 text-[0.78rem] font-normal text-brand-300 transition-colors hover:text-brand-200"
                 >
                   Open in Google Maps
                   <Icon name="arrow-up-right" size={13} />
                 </a>
               </div>
-            </div>
+            </Reveal>
 
             {/* form card */}
-            <div className="relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-ink-950/70 p-7 sm:p-9">
-              <div className="orb -right-20 -top-24 h-56 w-56 bg-azure-600/20" aria-hidden="true" />
-              <div className="relative">
-                <p className="eyebrow">
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
-                  Get a free quote
-                </p>
-                <h2 className="mt-3 font-display text-[1.4rem] font-semibold leading-snug text-white">
-                  Please fill this form and we'll get back to you as soon as possible!
-                </h2>
-                <div className="mt-6">
-                  <QuoteForm />
-                </div>
+            <Reveal delay={110} className="rounded-lg border border-line bg-ink-900 p-6 sm:p-7">
+              <p className="eyebrow">
+                <span className="h-px w-5 bg-brand-400" aria-hidden="true" />
+                Get a free quote
+              </p>
+              <h2 className="mt-3 font-display text-[1.2rem] font-light leading-snug tracking-[-0.02em] text-mist-50">
+                Please fill this form and we'll get back to you as soon as possible!
+              </h2>
+              <div className="mt-5">
+                <QuoteForm />
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
       {/* map + globe */}
-      <section className="py-16 lg:py-20">
-        <div className="container-x">
+      <section className="border-b border-line">
+        <div className="container-x py-14 lg:py-16">
           <SectionHeading
             eyebrow="Find us"
             title="Goregaon West, Mumbai"
             blurb="A short walk from Ram Mandir signal on Swami Vivekananda Road — easy to reach from the Western Express Highway and Goregaon station."
             action={{ label: "Get directions", href: `https://www.google.com/maps/search/?api=1&query=${company.address.mapQuery}` }}
           />
-          <div className="mt-9 grid gap-4 lg:grid-cols-[1.4fr_1fr]">
-            <div className="overflow-hidden rounded-[1.25rem] border border-white/10">
+          <Reveal className="mt-8 grid gap-3 lg:grid-cols-[1.4fr_1fr]">
+            <div className="overflow-hidden rounded-lg border border-line">
               <iframe
                 title="Map of Sam Infosystems office in Goregaon West, Mumbai"
                 src={`https://www.google.com/maps?q=${company.address.mapQuery}&output=embed`}
@@ -193,39 +189,38 @@ export default function ContactPage() {
                 height="380"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="block h-[340px] w-full border-0 grayscale-[35%] contrast-[1.05] sm:h-[380px]"
+                className="block h-[320px] w-full border-0 grayscale sm:h-[360px]"
               />
             </div>
-            <div className="relative overflow-hidden rounded-[1.25rem] border border-white/10 bg-ink-900/60">
+            <div className="relative overflow-hidden rounded-lg border border-line bg-ink-900">
               <Image
                 src="/images/contact-globe.webp"
                 alt="Network arc connecting Mumbai to international locations"
                 width={1400}
                 height={1000}
                 sizes="(min-width: 1024px) 34vw, 92vw"
-                className="h-full min-h-[220px] w-full object-cover opacity-80"
+                className="h-full min-h-[220px] w-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/40 to-transparent" />
-              <div className="absolute inset-x-5 bottom-5">
-                <p className="font-display text-[0.66rem] font-semibold uppercase tracking-[0.2em] text-brand-300">
+              <div className="absolute inset-x-0 bottom-0 border-t border-line bg-ink-950/95 px-4 py-3">
+                <p className="text-[0.6rem] font-medium uppercase tracking-[0.18em] text-brand-300">
                   Serving clients from
                 </p>
-                <p className="mt-1.5 font-display text-[1.1rem] font-semibold text-white">
+                <p className="mt-1 font-display text-[1rem] font-normal text-mist-50">
                   Mumbai · Maharashtra · India
                 </p>
-                <p className="mt-1 text-[0.78rem] text-mist-400">
+                <p className="mt-0.5 text-[0.74rem] font-light text-mist-500">
                   Remote delivery and support nationwide.
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* quick links */}
-      <section className="border-t border-white/[0.07] bg-ink-900/40 py-16">
-        <div className="container-x">
-          <div className="grid gap-4 sm:grid-cols-3">
+      <section className="bg-ink-900">
+        <div className="container-x py-12">
+          <div className="stagger grid gap-3 sm:grid-cols-3">
             {[
               { icon: "cloud", label: "Our products", href: "/products", text: "11 platforms we license and support" },
               { icon: "shield-check", label: "Our security services", href: "/security", text: "MDM, endpoint, firewall, VAPT" },
@@ -234,13 +229,15 @@ export default function ContactPage() {
               <Link
                 key={l.href}
                 href={l.href}
-                className="group card-hover rounded-xl border border-white/[0.08] bg-ink-950/50 p-5"
+                className="card group rounded-lg p-5"
               >
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-400/25 bg-brand-400/10 text-brand-300">
-                  <Icon name={l.icon} size={17} />
+                <span className="flex h-8 w-8 items-center justify-center rounded border border-line text-brand-300">
+                  <Icon name={l.icon} size={15} />
                 </span>
-                <h3 className="mt-4 font-display text-[0.92rem] font-semibold text-white">{l.label}</h3>
-                <p className="mt-1 text-[0.78rem] text-mist-500">{l.text}</p>
+                <h3 className="mt-3.5 font-display text-[0.88rem] font-normal text-mist-50">
+                  {l.label}
+                </h3>
+                <p className="mt-1 text-[0.74rem] font-light text-mist-500">{l.text}</p>
               </Link>
             ))}
           </div>

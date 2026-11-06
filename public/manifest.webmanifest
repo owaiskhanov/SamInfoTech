@@ -4,8 +4,8 @@
   "description": "IT solutions, cloud and security provider based in Mumbai, India. Since 2000.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#050b18",
-  "theme_color": "#050b18",
+  "background_color": "#080B12",
+  "theme_color": "#080B12",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",

@@ -19,21 +19,20 @@ const art: Record<string, { src: string; alt: string }> = {
 export function CollectionBanner({ kind }: { kind: "solutions" | "security" | "products" }) {
   const a = art[kind];
   return (
-    <div className="relative hidden overflow-hidden rounded-[1.4rem] border border-white/10 lg:block">
+    <div className="relative hidden overflow-hidden rounded-lg border border-line lg:block">
       <Image
         src={a.src}
         alt={a.alt}
         width={1408}
-        height={900}
-        sizes="38vw"
-        className="h-full min-h-[19rem] w-full object-cover"
+        height={1000}
+        sizes="34vw"
+        className="h-full min-h-[17rem] w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink-950 via-ink-950/25 to-transparent" />
-      <div className="absolute inset-x-5 bottom-5">
-        <p className="font-display text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-brand-300">
+      <div className="absolute inset-x-0 bottom-0 border-t border-line bg-ink-950/95 px-4 py-3">
+        <p className="text-[0.6rem] font-medium uppercase tracking-[0.2em] text-brand-300">
           Sam Infosystems
         </p>
-        <p className="mt-1 text-[0.8rem] text-mist-300">
+        <p className="mt-1 text-[0.76rem] font-light text-mist-400">
           Delivered, managed and supported from Goregaon West, Mumbai.
         </p>
       </div>

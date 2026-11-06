@@ -39,7 +39,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label className="label" htmlFor="qf-name">
-            Name <span className="text-brand-400">*</span>
+            Name <span className="text-brand-300">*</span>
           </label>
           <input
             id="qf-name"
@@ -66,7 +66,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
 
       <div>
         <label className="label" htmlFor="qf-email">
-          Email <span className="text-brand-400">*</span>
+          Email <span className="text-brand-300">*</span>
         </label>
         <input
           id="qf-email"

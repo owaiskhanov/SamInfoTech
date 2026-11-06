@@ -43,7 +43,7 @@ const timeline = [
   },
   {
     year: "Today",
-    title: "22 products & services, one partner",
+    title: "22 offerings, one partner",
     body: "From cloud infrastructure and migration to 24×7 security management, IT consultancy and training — delivered by one accountable team.",
   },
 ];
@@ -51,53 +51,56 @@ const timeline = [
 export default function AboutPage() {
   return (
     <>
-      {/* hero */}
-      <section className="relative overflow-hidden border-b border-white/[0.07] pb-16 pt-10 lg:pb-20 lg:pt-12">
-        <div className="orb -left-32 -top-24 h-96 w-96 bg-brand-500/15" aria-hidden="true" />
-        <div className="absolute inset-0 grid-lines opacity-30" aria-hidden="true" />
-        <div className="container-x relative">
+      <section className="border-b border-line">
+        <div className="container-x pb-14 pt-8 lg:pb-16 lg:pt-10">
           <Breadcrumbs trail={[{ label: "About Us" }]} />
-          <div className="mt-10 grid gap-12 lg:grid-cols-[1.1fr_1fr] lg:items-center">
+
+          <div className="mt-8 grid gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:items-start lg:gap-14">
             <div>
               <p className="eyebrow">
-                <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
+                <span className="h-px w-5 bg-brand-400" aria-hidden="true" />
                 About Us
               </p>
-              <h1 className="mt-4 font-display text-[clamp(2rem,4.6vw,3.3rem)] font-bold leading-[1.05] tracking-[-0.035em] text-white">
+              <h1 className="mt-4 font-display text-[clamp(1.95rem,4.4vw,3.1rem)] font-light leading-[1.05] tracking-[-0.035em] text-mist-50">
                 Twenty-five years of building{" "}
-                <span className="text-gradient">trust, not just systems.</span>
+                <span className="text-brand-300">trust, not just systems.</span>
               </h1>
-              <p className="mt-6 max-w-xl text-[1rem] leading-relaxed text-mist-300">
+              <p className="mt-6 max-w-xl text-[0.95rem] font-light leading-relaxed text-mist-300">
                 {about.intro}
               </p>
-              <p className="mt-4 max-w-xl text-[0.95rem] leading-relaxed text-mist-400">
+              <p className="mt-4 max-w-xl text-[0.9rem] font-light leading-relaxed text-mist-400">
                 {about.intro2}
               </p>
+
+              <Link href="/contact-us" className="btn btn-primary mt-8">
+                Talk to us
+                <Icon name="arrow-right" size={15} />
+              </Link>
             </div>
-            <Reveal className="relative">
-              <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+
+            <Reveal className="flex flex-col gap-3">
+              <div className="overflow-hidden rounded-lg border border-line">
                 <Image
                   src="/images/about-team.webp"
                   alt="Sam Infosystems team collaborating in their Mumbai office"
                   width={1408}
                   height={960}
                   priority
-                  sizes="(min-width: 1024px) 44vw, 92vw"
-                  className="w-full object-cover"
+                  sizes="(min-width: 1024px) 42vw, 92vw"
+                  className="aspect-[4/3] w-full object-cover"
                 />
               </div>
-              <div className="mt-4 grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-px overflow-hidden rounded-lg border border-line bg-line">
                 {[
                   { v: "2000", l: "Founded" },
                   { v: "Mumbai", l: "Head office" },
-                  { v: "22", l: "Services" },
+                  { v: "22", l: "Offerings" },
                 ].map((s) => (
-                  <div
-                    key={s.l}
-                    className="rounded-xl border border-white/[0.08] bg-white/[0.02] px-4 py-3"
-                  >
-                    <p className="font-display text-[1.05rem] font-semibold text-white">{s.v}</p>
-                    <p className="mt-0.5 text-[0.66rem] uppercase tracking-[0.14em] text-mist-500">
+                  <div key={s.l} className="bg-ink-900 px-3 py-3.5 sm:px-4">
+                    <p className="font-display text-[0.95rem] font-normal text-mist-50 sm:text-[1rem]">
+                      {s.v}
+                    </p>
+                    <p className="mt-0.5 text-[0.58rem] uppercase tracking-[0.1em] text-mist-500 sm:text-[0.62rem] sm:tracking-[0.12em]">
                       {s.l}
                     </p>
                   </div>
@@ -109,54 +112,55 @@ export default function AboutPage() {
       </section>
 
       {/* mission / vision */}
-      <section className="py-20 lg:py-24">
-        <div className="container-x grid gap-5 lg:grid-cols-2">
-          {[
-            { icon: "compass", label: "Mission", body: about.mission, accent: "#22d3ee" },
-            { icon: "globe-shield", label: "Vision", body: about.vision, accent: "#60a5fa" },
-          ].map((c) => (
-            <Reveal
-              key={c.label}
-              className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-ink-900/50 p-8"
-            >
-              <span
-                aria-hidden="true"
-                className="absolute inset-x-0 top-0 h-px"
-                style={{ background: `linear-gradient(90deg,transparent,${c.accent},transparent)` }}
-              />
-              <span
-                className="flex h-12 w-12 items-center justify-center rounded-xl border"
-                style={{ borderColor: `${c.accent}38`, background: `${c.accent}14`, color: c.accent }}
+      <section className="border-b border-line bg-ink-900">
+        <div className="container-x py-14 lg:py-16">
+          <div className="grid gap-3 lg:grid-cols-2">
+            {[
+              { icon: "compass", label: "Mission", body: about.mission },
+              { icon: "globe-shield", label: "Vision", body: about.vision },
+            ].map((c, i) => (
+              <Reveal
+                key={c.label}
+                delay={i * 90}
+                className="rounded-lg border border-line bg-ink-950 p-6 sm:p-7"
               >
-                <Icon name={c.icon} size={22} />
-              </span>
-              <h2 className="mt-6 font-display text-[1.35rem] font-semibold text-white">{c.label}</h2>
-              <p className="mt-3 text-[0.95rem] leading-relaxed text-mist-300">{c.body}</p>
-            </Reveal>
-          ))}
+                <span className="flex h-9 w-9 items-center justify-center rounded border border-line text-brand-300">
+                  <Icon name={c.icon} size={16} />
+                </span>
+                <h2 className="mt-4 font-display text-[1.2rem] font-normal tracking-[-0.02em] text-mist-50">
+                  {c.label}
+                </h2>
+                <p className="mt-2.5 text-[0.9rem] font-light leading-relaxed text-mist-300">
+                  {c.body}
+                </p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* values */}
-      <section className="border-y border-white/[0.07] bg-ink-900/40 py-20 lg:py-24">
-        <div className="container-x">
-          <SectionHeading
-            eyebrow="What we stand for"
-            title="Core values that outlast every technology cycle"
-            blurb="Four commitments that shape how we scope work, price it, and stay on the phone long after go-live."
-          />
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <section className="border-b border-line">
+        <div className="container-x py-14 lg:py-16">
+          <Reveal>
+            <SectionHeading
+              eyebrow="What we stand for"
+              title="Core values that outlast every technology cycle"
+              blurb="Four commitments that shape how we scope work, price it, and stay on the phone long after go-live."
+            />
+          </Reveal>
+          <div className="mt-9 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-line bg-line min-[420px]:grid-cols-2 lg:grid-cols-4">
             {about.values.map((v, i) => (
-              <Reveal
-                key={v.title}
-                delay={i * 80}
-                className="card-hover rounded-2xl border border-white/[0.08] bg-ink-950/60 p-6"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-400/30 bg-brand-400/10 text-brand-300">
-                  <Icon name={v.icon} size={18} />
+              <Reveal key={v.title} delay={i * 70} className="bg-ink-950 p-5">
+                <span className="flex h-8 w-8 items-center justify-center rounded border border-line text-brand-300">
+                  <Icon name={v.icon} size={15} />
                 </span>
-                <h3 className="mt-5 font-display text-[0.98rem] font-semibold text-white">{v.title}</h3>
-                <p className="mt-2 text-[0.84rem] leading-relaxed text-mist-400">{v.body}</p>
+                <h3 className="mt-3.5 font-display text-[0.9rem] font-normal text-mist-50">
+                  {v.title}
+                </h3>
+                <p className="mt-1.5 text-[0.78rem] font-light leading-relaxed text-mist-500">
+                  {v.body}
+                </p>
               </Reveal>
             ))}
           </div>
@@ -164,85 +168,84 @@ export default function AboutPage() {
       </section>
 
       {/* timeline */}
-      <section className="py-20 lg:py-24">
-        <div className="container-x">
-          <SectionHeading
-            eyebrow="Our journey"
-            title="From SAM INFOTECH to Sam Infosystems"
-            blurb="A steady accumulation of capability — and of clients who stayed."
-          />
-          <ol className="relative mt-12 space-y-0 border-l border-white/10 pl-6 sm:pl-8">
+      <section className="border-b border-line bg-ink-900">
+        <div className="container-x py-14 lg:py-16">
+          <Reveal>
+            <SectionHeading
+              eyebrow="Our journey"
+              title="From SAM INFOTECH to Sam Infosystems"
+              blurb="A steady accumulation of capability — and of clients who stayed."
+            />
+          </Reveal>
+          <ol className="mt-9 border-l border-line">
             {timeline.map((t, i) => (
-              <li key={t.year} className="relative pb-10 last:pb-0">
+              <Reveal as="li" key={t.year} delay={i * 60} className="relative pb-8 pl-6 last:pb-0">
                 <span
-                  className="absolute -left-[1.72rem] top-1 flex h-3 w-3 items-center justify-center rounded-full border border-brand-400/60 bg-ink-950 sm:-left-[2.22rem]"
+                  className="absolute -left-[3px] top-1.5 h-1.5 w-1.5 rounded-full bg-brand-300"
                   aria-hidden="true"
-                >
-                  <span className="h-1.5 w-1.5 rounded-full bg-brand-400" />
-                </span>
-                <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-4">
-                  <span className="font-display text-[0.78rem] font-semibold uppercase tracking-[0.18em] text-brand-300">
+                />
+                <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:gap-4">
+                  <span className="text-[0.72rem] font-medium uppercase tracking-[0.14em] text-brand-300">
                     {t.year}
                   </span>
-                  <h3 className="font-display text-[1.05rem] font-semibold text-white">{t.title}</h3>
+                  <h3 className="font-display text-[0.98rem] font-normal text-mist-50">{t.title}</h3>
                 </div>
-                <p className="mt-2 max-w-2xl text-[0.9rem] leading-relaxed text-mist-400">{t.body}</p>
-              </li>
+                <p className="mt-1.5 max-w-2xl text-[0.86rem] font-light leading-relaxed text-mist-400">
+                  {t.body}
+                </p>
+              </Reveal>
             ))}
           </ol>
         </div>
       </section>
 
       {/* quote */}
-      <section className="border-t border-white/[0.07] bg-ink-900/40 py-20 lg:py-24">
-        <div className="container-x grid gap-10 lg:grid-cols-[1fr_1.05fr] lg:items-start">
-          <div>
-            <SectionHeading
-              eyebrow="Get a free quote"
-              title="Please fill this form and we'll get back to you as soon as possible!"
-              blurb="Prefer to talk? Call us during business hours — a real engineer answers."
-            />
-            <div className="mt-8 space-y-3">
-              <a
-                href={company.phoneHref}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 transition-colors hover:border-brand-400/40"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-400/10 text-brand-300">
-                  <Icon name="phone" size={17} />
-                </span>
-                <span>
-                  <span className="block text-[0.66rem] uppercase tracking-[0.16em] text-mist-500">
-                    Phone
+      <section>
+        <div className="container-x py-14 lg:py-16">
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-14">
+            <div>
+              <Reveal>
+                <SectionHeading
+                  eyebrow="Get a free quote"
+                  title="Please fill this form and we'll get back to you as soon as possible!"
+                  blurb="Prefer to talk? Call us during business hours — a real engineer answers."
+                />
+              </Reveal>
+              <div className="mt-7 flex flex-col gap-2.5">
+                <a href={company.phoneHref} className="card flex items-center gap-3 rounded-lg p-4">
+                  <span className="flex h-9 w-9 items-center justify-center rounded border border-line text-brand-300">
+                    <Icon name="phone" size={15} />
                   </span>
-                  <span className="font-display text-[0.9rem] font-semibold text-white">
-                    {company.phone}
+                  <span>
+                    <span className="block text-[0.62rem] uppercase tracking-[0.14em] text-mist-500">
+                      Phone
+                    </span>
+                    <span className="font-display text-[0.86rem] font-normal text-mist-100">
+                      {company.phone}
+                    </span>
                   </span>
-                </span>
-              </a>
-              <a
-                href={`mailto:${company.emailGeneral}`}
-                className="flex items-center gap-3 rounded-xl border border-white/[0.08] bg-white/[0.02] p-4 transition-colors hover:border-brand-400/40"
-              >
-                <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-brand-400/10 text-brand-300">
-                  <Icon name="mail" size={17} />
-                </span>
-                <span>
-                  <span className="block text-[0.66rem] uppercase tracking-[0.16em] text-mist-500">
-                    General information
+                </a>
+                <a
+                  href={`mailto:${company.emailGeneral}`}
+                  className="card flex items-center gap-3 rounded-lg p-4"
+                >
+                  <span className="flex h-9 w-9 items-center justify-center rounded border border-line text-brand-300">
+                    <Icon name="mail" size={15} />
                   </span>
-                  <span className="font-display text-[0.9rem] font-semibold text-white">
-                    {company.emailGeneral}
+                  <span>
+                    <span className="block text-[0.62rem] uppercase tracking-[0.14em] text-mist-500">
+                      General information
+                    </span>
+                    <span className="font-display text-[0.86rem] font-normal text-mist-100">
+                      {company.emailGeneral}
+                    </span>
                   </span>
-                </span>
-              </a>
+                </a>
+              </div>
             </div>
-            <Link href="/contact-us" className="btn btn-ghost mt-6">
-              Visit the contact page
-              <Icon name="arrow-right" size={16} />
-            </Link>
-          </div>
-          <div className="rounded-[1.5rem] border border-white/10 bg-ink-950/60 p-7 sm:p-9">
-            <QuoteForm />
+            <Reveal delay={90} className="rounded-lg border border-line bg-ink-900 p-6 sm:p-7">
+              <QuoteForm />
+            </Reveal>
           </div>
         </div>
       </section>
