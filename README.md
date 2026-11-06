@@ -146,6 +146,34 @@ surface tints (`ink-950 → ink-600`) and generous whitespace. There is not a si
 - **Responsive**: single-column from 320px, two columns at 420px, three at `lg`, with
   `grid-cols-*` breakpoints on every grid and no fixed pixel widths or `nowrap` text.
 
+## The footer
+
+The footer is the last screen of the site, so it is built rather than filled in. Five
+parts, top to bottom, each with a no-JavaScript and reduced-motion behaviour:
+
+- **Signature band**: the wordmark at display size with the address line, as a flat
+  surface. Pure markup.
+- **Live status strip** (`FooterStatus`): whether the Goregaon office is open right
+  now, in Asia/Kolkata, with the time until it closes or opens next; the Mumbai wall
+  clock; years of practice since 2000; and the reply promise. The server renders a
+  stable snapshot ("Mon to Sat", "9:30 to 18:30 IST") and the live values appear
+  after mount, so hydration never shifts anything. Hours are Mon to Sat, 09:30 to
+  18:30 IST, with Sunday closed.
+- **Platform band** (`FooterMarquee`): the eleven platforms actually licensed and
+  supported, scrolling on a pure-CSS loop. It pauses on hover and focus, becomes a
+  normal horizontal scroller under reduced motion, and carries an `sr-only` list so
+  the content is not lost to a screen reader.
+- **Navigation** (`FooterColumns`): the three categories as lists. "More" reveals the
+  one line describing each entry in place, through a grid-row transition, with a real
+  `aria-expanded` button. No duplicated links.
+- **Statement + rail**: a rotating brand statement (7s, pauses on hover, supports
+  reduced motion through flat ticks) and a rail whose speed follows your scroll,
+  slowing as you go down and speeding up as you go back up.
+
+The rail is the one piece that needs JavaScript, and it is written to stay cheap: a
+single `requestAnimationFrame` loop writing `transform` only, no React state per frame,
+and it never registers at all when `prefers-reduced-motion` is set.
+
 ## Theming (dark and light)
 
 Dark is the default; light is a first-class palette, not an inversion.
