@@ -40,11 +40,11 @@ function srcSetFor(full: string, small: string, width: number) {
 }
 
 /**
- * React 19 serialises the SVG-style `srcSet` prop as `srcSet=` in the markup,
- * and browsers only honour lowercase `srcset` on <source>. Spread the attribute
- * instead so the HTML that ships is what the HTML spec says.
+ * Note on casing: React emits the attribute as `srcSet=`. That is fine. HTML
+ * attribute names are case-insensitive and the tokenizer lowercases them, so
+ * the browser sees `srcset` and honours it. Using the React prop keeps us out
+ * of the "Invalid DOM property" path entirely.
  */
-const srcsetAttr = (value: string) => ({ srcset: value }) as Record<string, string>;
 
 export function ThemedImage({
   src,
@@ -86,18 +86,16 @@ export function ThemedImage({
       {!explicit && (
         <source
           media="(prefers-color-scheme: light)"
-          {...srcsetAttr(srcSetFor(lightSrc, lightSmall, width))}
+          srcSet={srcSetFor(lightSrc, lightSmall, width)}
           sizes={sizes}
         />
       )}
       <img
         src={set}
-        {...srcsetAttr(
-          srcSetFor(
-            explicit && light ? lightSrc : dark,
-            explicit && light ? lightSmall : darkSmall,
-            width,
-          ),
+        srcSet={srcSetFor(
+          explicit && light ? lightSrc : dark,
+          explicit && light ? lightSmall : darkSmall,
+          width,
         )}
         sizes={sizes}
         alt={alt}

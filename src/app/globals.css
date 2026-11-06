@@ -452,6 +452,8 @@
    Same rule the reveal animation already follows: fall back to plain dark. */
 @media (scripting: none) {
   :root { color-scheme: dark; --color-ink-950: #05070c; --color-ink-900: #080b12; }
+  /* no observer will ever add .is-visible, so show the content outright */
+  .reveal { opacity: 1; filter: none; transform: none; }
 }
 
 /* marquee */
