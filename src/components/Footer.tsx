@@ -15,7 +15,7 @@ export function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1fr] lg:gap-8">
           {/* brand */}
           <div className="sm:col-span-2 lg:col-span-1">
-            <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Sam Infosystems — Home">
+            <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Sam Infosystems, Home">
               <LogoMark size={30} className="text-brand-300" />
               <span className="flex flex-col leading-none">
                 <span className="font-display text-[0.95rem] font-medium tracking-[-0.02em] text-mist-50">
@@ -28,7 +28,7 @@ export function Footer() {
             </Link>
 
             <p className="mt-5 max-w-xs text-[0.84rem] font-light leading-relaxed text-mist-400">
-              A comprehensive IT solutions provider focused on software, cloud and security —
+              A comprehensive IT solutions provider focused on software, cloud and security,
               architecting, deploying and supporting enterprise technology since 2000.
             </p>
 

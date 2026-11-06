@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
+import { ThemedImage } from "./ThemedImage";
 import { Icon } from "./Icon";
 
 type Slide = {
@@ -23,7 +23,7 @@ const slides: Slide[] = [
     titleAccent: "under pressure.",
     subtitle: "With a strong focus on software and security.",
     body:
-      "Layered, continuously monitored defence across your networks, endpoints, devices and data — delivered by a team that has been doing exactly this since 2000.",
+      "Layered, continuously monitored defence across your networks, endpoints, devices and data, delivered by a team that has been doing exactly this since 2000.",
     image: "/images/hero-security.webp",
     alt: "Holographic shield formed from encrypted data streams",
     cta: { label: "Explore security", href: "/security" },
@@ -34,7 +34,7 @@ const slides: Slide[] = [
     titleAccent: "real workloads.",
     subtitle: "With a strong focus on software and cloud technologies.",
     body:
-      "Architect, migrate and operate cloud infrastructure built for high availability — Azure, AWS and Google Workspace, supported end to end by one accountable partner.",
+      "Architect, migrate and operate cloud infrastructure built for high availability: Azure, AWS and Google Workspace, supported end to end by one accountable partner.",
     image: "/images/hero-cloud.webp",
     alt: "Geometric cloud formed from glass data blocks above a digital landscape",
     cta: { label: "Explore cloud", href: "/solutions" },
@@ -75,7 +75,7 @@ export function HeroSlider() {
     >
       <div className="container-x">
         <div className="grid items-center gap-10 py-14 sm:py-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:py-20">
-          {/* copy — remounts on slide change so the blur-in entrance replays */}
+          {/* copy: remounts on slide change so the blur-in entrance replays */}
           <div key={index} className="max-w-xl">
             <p className="eyebrow rise rise-1">
               <span className="h-px w-6 bg-brand-400" aria-hidden="true" />
@@ -153,10 +153,10 @@ export function HeroSlider() {
             </div>
           </div>
 
-          {/* artwork — flat frame, no overlay gradients */}
+          {/* artwork: flat frame, no overlay gradients */}
           <div key={`art-${index}`} className="rise rise-2 relative">
             <div className="relative overflow-hidden rounded-lg border border-line bg-ink-900">
-              <Image
+              <ThemedImage
                 src={slide.image}
                 alt={slide.alt}
                 width={1376}

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { ThemedImage } from "./ThemedImage";
 
 const art: Record<string, { src: string; alt: string }> = {
   solutions: {
@@ -20,7 +20,7 @@ export function CollectionBanner({ kind }: { kind: "solutions" | "security" | "p
   const a = art[kind];
   return (
     <div className="relative hidden overflow-hidden rounded-lg border border-line lg:block">
-      <Image
+      <ThemedImage
         src={a.src}
         alt={a.alt}
         width={1408}

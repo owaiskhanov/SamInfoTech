@@ -13,7 +13,7 @@ const IMG = path.join(PUB, "images");
 
 const log = (...a) => console.log("•", ...a);
 
-/* ——————————————————————————————— 1. photos ——————————————————————————————— */
+/* ------------------------------- 1. photos ------------------------------- */
 
 const photos = [
   { file: "hero-security.webp", out: "hero-security.webp", width: 1920, quality: 76 },
@@ -24,6 +24,42 @@ const photos = [
   { file: "contact-globe.webp", out: "contact-globe.webp", width: 1400, quality: 78 },
   { file: "products-grid.webp", out: "products-grid.webp", width: 1600, quality: 76 },
 ];
+
+/**
+ * The light theme does not dim the dark artwork with a CSS filter: it gets its
+ * own files. Two different source families, two different treatments:
+ *
+ *  - digital / abstract renders (glowing wireframes, a holographic globe, a
+ *    wall of glass tiles) are inverted into fine teal ink on paper, which is
+ *    the print-illustration equivalent of the dark version;
+ *  - photographs are not inverted at all, because a negative reads as an error.
+ *    They are pushed to daylight: brighter, calmer, slightly desaturated, which
+ *    is the honest light-mode counterpart of the same scene.
+ */
+const inkWash = (img, saturation = 1) =>
+  img
+    .negate()
+    .modulate({ hue: 180, saturation })
+    .linear(1.5, -76) // push the highlights to paper white, the marks to navy ink
+    .removeAlpha();
+
+const daylight = (img) =>
+  img.modulate({ brightness: 1.5, saturation: 0.6 }).linear(1.02, 44);
+
+const lightTreatment = { ink: inkWash, daylight };
+
+/** A few sources carry stray hues that look off-brand as ink (the glass wall skews violet). */
+const lightDesaturation = { "products-grid.webp": 0.4 };
+
+const lightKinds = {
+  "hero-security.webp": "ink",
+  "hero-cloud.webp": "ink",
+  "about-team.webp": "daylight",
+  "security-soc.webp": "daylight",
+  "solutions-core.webp": "ink",
+  "contact-globe.webp": "ink",
+  "products-grid.webp": "ink",
+};
 
 async function buildPhotos() {
   await mkdir(IMG, { recursive: true });
@@ -51,11 +87,34 @@ async function buildPhotos() {
       .toBuffer();
     await writeFile(path.join(IMG, p.out.replace(".webp", "-sm.webp")), small);
 
-    log(`${p.out}  ${(out.length / 1024).toFixed(0)}kB  (${target}px)`);
+    // light-theme twin (-light.webp and -light-sm.webp)
+    const kind = lightKinds[p.out] ?? "ink";
+    const treatment = lightTreatment[kind];
+    const sat = kind === "ink" ? (lightDesaturation[p.out] ?? 1) : 1;
+    const lightOut = await treatment(
+      sharp(buf).resize({ width: target, withoutEnlargement: true }),
+      sat,
+    )
+      .webp({ quality: p.quality, effort: 6 })
+      .toBuffer();
+    await writeFile(path.join(IMG, p.out.replace(".webp", "-light.webp")), lightOut);
+
+    const lightSmall = await treatment(
+      sharp(buf).resize({ width: Math.round(target * 0.62), withoutEnlargement: true }),
+      sat,
+    )
+      .webp({ quality: p.quality - 4, effort: 6 })
+      .toBuffer();
+    await writeFile(path.join(IMG, p.out.replace(".webp", "-light-sm.webp")), lightSmall);
+
+    log(
+      `${p.out}  ${(out.length / 1024).toFixed(0)}kB  (${target}px)` +
+        `  · light ${(lightOut.length / 1024).toFixed(0)}kB`,
+    );
   }
 }
 
-/* ——————————————————————————————— 2. brand mark ——————————————————————————————— */
+/* ------------------------------ 2. brand mark ------------------------------ */
 
 const MARK = `
   <path d="M20 2.4 34.8 11v17.6L20 37.2 5.2 28.6V11L20 2.4Z"
@@ -104,10 +163,18 @@ const svgToPng = async (svg, width) => {
   return resvg.render().asPng();
 };
 
-/* ————————————————————————————— 3. favicons & app icons ————————————————————————————— */
+/* --------------------------- 3. favicons & app icons --------------------------- */
+
+/** Light-theme favicon: paper tile, ink-cyan mark, so it sits in a light tab bar. */
+const iconSvgLight = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <rect width="64" height="64" rx="12" fill="#F6F7F9"/>
+  <rect x="0.5" y="0.5" width="63" height="63" rx="11.5" fill="none" stroke="#CFD6E1"/>
+  <g transform="translate(12 12)">${MARK.split("#35C6DC").join("#0B7285")}</g>
+</svg>`;
 
 async function buildIcons() {
   await writeFile(path.join(PUB, "icon.svg"), iconSvg);
+  await writeFile(path.join(PUB, "icon-light.svg"), iconSvgLight);
   await writeFile(path.join(PUB, "safari-pinned-tab.svg"), pinnedSvg);
 
   const pngs = {};
@@ -119,6 +186,16 @@ async function buildIcons() {
   await writeFile(path.join(PUB, "android-chrome-192x192.png"), pngs[192]);
   await writeFile(path.join(PUB, "android-chrome-512x512.png"), pngs[512]);
   await writeFile(path.join(PUB, "maskable-512x512.png"), pngs.maskable);
+
+  // light twins, offered through media="(prefers-color-scheme: light)"
+  await writeFile(
+    path.join(PUB, "favicon-32x32-light.png"),
+    await svgToPng(iconSvgLight, 32),
+  );
+  await writeFile(
+    path.join(PUB, "favicon-96x96-light.png"),
+    await svgToPng(iconSvgLight, 96),
+  );
 
   // .ico container with 16/32/48 frames
   const ico = await sharp(pngs[48]).toFormat("png").toBuffer();
@@ -139,6 +216,15 @@ async function buildIcons() {
     await svgToPng(appleSvg, 180),
   );
 
+  const appleLightSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+    <rect width="180" height="180" fill="#F6F7F9"/>
+    <g transform="translate(34 34) scale(2.8)">${MARK.split("#35C6DC").join("#0B7285")}</g>
+  </svg>`;
+  await writeFile(
+    path.join(PUB, "apple-touch-icon-light.png"),
+    await svgToPng(appleLightSvg, 180),
+  );
+
   // metadata for PWA / Windows tiles
   await writeFile(
     path.join(PUB, "manifest.webmanifest"),
@@ -150,12 +236,15 @@ async function buildIcons() {
           "IT solutions, cloud and security provider based in Mumbai, India. Since 2000.",
         start_url: "/",
         display: "standalone",
+        // Chrome honours `color_scheme` for the standalone splash screen, so the
+        // installed app opens on the same theme the site was last using.
         background_color: "#080B12",
-        theme_color: "#080B12",
+        theme_color: "#05070c",
         icons: [
           { src: "/android-chrome-192x192.png", sizes: "192x192", type: "image/png" },
           { src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png" },
           { src: "/maskable-512x512.png", sizes: "512x512", type: "image/png", purpose: "maskable" },
+          { src: "/android-chrome-512x512.png", sizes: "512x512", type: "image/png", purpose: "monochrome" },
         ],
       },
       null,
@@ -205,7 +294,7 @@ function buildIco(entries) {
   return Buffer.concat([header, dir, ...entries.map((e) => e.data)]);
 }
 
-/* ——————————————————————————————— 4. OG card ——————————————————————————————— */
+/* ------------------------------- 4. OG card ------------------------------- */
 
 async function loadFont(woffPath) {
   const woff = await readFile(woffPath);
@@ -213,7 +302,43 @@ async function loadFont(woffPath) {
   return Buffer.from(await decompress(woff));
 }
 
-async function buildOg() {
+/** Palette for one OG card variant. Same layout, two flat colour ways. */
+const ogThemes = {
+  dark: {
+    suffix: "",
+    page: "#080B12",
+    hairline: "#262F3D",
+    title: "#F6F8FB",
+    accent: "#6FDCEA",
+    body: "#AAB5C6",
+    muted: "#66707F",
+    eyebrow: "#8590A3",
+    pillBg: "#6FDCEA",
+    pillInk: "#04222A",
+    photo: "hero-security.webp",
+    scrim: "rgba(8,11,18,0.45)",
+    viewport: "#05070c",
+  },
+  light: {
+    suffix: "-light",
+    page: "#F6F7F9",
+    hairline: "#CFD6E1",
+    title: "#0A0F16",
+    accent: "#0B7285",
+    body: "#3D4857",
+    muted: "#6C7686",
+    eyebrow: "#56606F",
+    pillBg: "#0B7285",
+    pillInk: "#F7FDFF",
+    photo: "hero-security-light.webp",
+    scrim: "rgba(246,247,249,0.30)",
+    viewport: "#f6f7f9",
+  },
+};
+
+async function buildOg(themeName) {
+  const t = ogThemes[themeName];
+
   const interTight = await loadFont(
     path.join(root, "node_modules/@fontsource-variable/inter-tight/files/inter-tight-latin-wght-normal.woff2"),
   );
@@ -221,9 +346,9 @@ async function buildOg() {
     path.join(root, "node_modules/@fontsource-variable/inter/files/inter-latin-wght-normal.woff2"),
   );
 
-  const hero = await sharp(path.join(IMG, "hero-security.webp"))
+  const hero = await sharp(path.join(IMG, t.photo))
     .resize({ width: 760 })
-    .modulate({ brightness: 1.05 })
+    .modulate({ brightness: themeName === "dark" ? 1.05 : 1.0 })
     .jpeg({ quality: 82 })
     .toBuffer();
   const heroUri = `data:image/jpeg;base64,${hero.toString("base64")}`;
@@ -241,7 +366,7 @@ async function buildOg() {
     {
       width: "1200px",
       height: "630px",
-      background: "#080B12",
+      background: t.page,
       position: "relative",
       flexDirection: "column",
       justifyContent: "space-between",
@@ -258,7 +383,7 @@ async function buildOg() {
           width: "520px",
           height: "630px",
           overflow: "hidden",
-          borderLeft: "1px solid #262F3D",
+          borderLeft: `1px solid ${t.hairline}`,
         },
         [
           {
@@ -274,7 +399,7 @@ async function buildOg() {
             {
               position: "absolute",
               inset: "0px",
-              backgroundColor: "rgba(8,11,18,0.45)",
+              backgroundColor: t.scrim,
             },
             [],
           ),
@@ -291,7 +416,7 @@ async function buildOg() {
               fontSize: "23px",
               fontWeight: 500,
               letterSpacing: "-0.02em",
-              color: "#F6F8FB",
+              color: t.title,
             },
             "Sam Infosystems",
           ),
@@ -301,7 +426,7 @@ async function buildOg() {
               fontSize: "10px",
               fontWeight: 400,
               letterSpacing: "0.3em",
-              color: "#66707F",
+              color: t.muted,
               marginTop: "8px",
             },
             "PVT LTD  ·  SINCE 2000",
@@ -317,7 +442,7 @@ async function buildOg() {
             fontSize: "14px",
             fontWeight: 500,
             letterSpacing: "0.26em",
-            color: "#8590A3",
+            color: t.eyebrow,
             marginBottom: "20px",
           },
           "MUMBAI · INDIA",
@@ -329,7 +454,7 @@ async function buildOg() {
             fontWeight: 300,
             lineHeight: 1.05,
             letterSpacing: "-0.04em",
-            color: "#F6F8FB",
+            color: t.title,
           },
           "IT solutions,",
         ),
@@ -340,7 +465,7 @@ async function buildOg() {
             fontWeight: 300,
             lineHeight: 1.05,
             letterSpacing: "-0.04em",
-            color: "#6FDCEA",
+            color: t.accent,
           },
           "cloud & security.",
         ),
@@ -350,7 +475,7 @@ async function buildOg() {
             fontSize: "19px",
             fontWeight: 300,
             lineHeight: 1.5,
-            color: "#AAB5C6",
+            color: t.body,
             marginTop: "22px",
             maxWidth: "460px",
           },
@@ -365,10 +490,10 @@ async function buildOg() {
             fontFamily: "Inter",
             fontSize: "15px",
             fontWeight: 500,
-            color: "#04222A",
+            color: t.pillInk,
             padding: "10px 18px",
             borderRadius: "6px",
-            backgroundColor: "#6FDCEA",
+            backgroundColor: t.pillBg,
           },
           "saminfosystems.com",
         ),
@@ -377,7 +502,7 @@ async function buildOg() {
             fontFamily: "Inter",
             fontSize: "14px",
             fontWeight: 300,
-            color: "#66707F",
+            color: t.muted,
           },
           "+91 98215 34588  ·  info@saminfosystems.com",
         ),
@@ -398,20 +523,21 @@ async function buildOg() {
   });
 
   const png = new Resvg(svg, { fitTo: { mode: "width", value: 1200 } }).render().asPng();
-  await writeFile(path.join(PUB, "opengraph-image.png"), png);
+  await writeFile(path.join(PUB, `opengraph-image${t.suffix}.png`), png);
 
   // Twitter/X friendly JPEG variant (smaller, no alpha)
   const jpg = await sharp(png).jpeg({ quality: 90, mozjpeg: true }).toBuffer();
-  await writeFile(path.join(PUB, "social-share.jpg"), jpg);
+  await writeFile(path.join(PUB, `social-share${t.suffix}.jpg`), jpg);
 
   log(
-    `opengraph-image.png ${(png.length / 1024).toFixed(0)}kB · social-share.jpg ${(jpg.length / 1024).toFixed(0)}kB`,
+    `opengraph-image${t.suffix}.png ${(png.length / 1024).toFixed(0)}kB · social-share${t.suffix}.jpg ${(jpg.length / 1024).toFixed(0)}kB`,
   );
 }
 
-/* ——————————————————————————————— run ——————————————————————————————— */
+/* --------------------------------- run --------------------------------- */
 
 await buildPhotos();
 await buildIcons();
-await buildOg();
+await buildOg("dark");
+await buildOg("light");
 log("done");

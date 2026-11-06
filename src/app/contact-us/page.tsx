@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ThemedImage } from "@/components/ThemedImage";
 import Link from "next/link";
 import { QuoteForm } from "@/components/QuoteForm";
 import { Reveal } from "@/components/Reveal";
@@ -8,12 +8,12 @@ import { Icon } from "@/components/Icon";
 import { company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contact Us — Mumbai Office & Sales",
+  title: "Contact Us | Mumbai Office & Sales",
   description:
     "Reach Sam Infosystems: 101-102 Neminath Square, Goregaon West, Mumbai 400104. Call +91-9821534588 or email info@saminfosystems.com / sales@saminfosystems.com.",
   alternates: { canonical: "/contact-us" },
   openGraph: {
-    title: "Contact Sam Infosystems — Mumbai",
+    title: "Contact Sam Infosystems | Mumbai",
     description:
       "Office in Goregaon West, Mumbai. Call +91-9821534588 or email info@saminfosystems.com.",
     images: ["/social-share.jpg"],
@@ -96,7 +96,7 @@ export default function ContactPage() {
                 Contact Us
               </p>
               <h1 className="mt-4 font-display text-[clamp(1.95rem,4.4vw,3.1rem)] font-light leading-[1.05] tracking-[-0.035em] text-mist-50">
-                Reach out to us —{" "}
+                Reach out to us.{" "}
                 <span className="text-brand-300">we answer like engineers.</span>
               </h1>
               <p className="mt-5 max-w-lg text-[0.95rem] font-light leading-relaxed text-mist-400">
@@ -177,11 +177,14 @@ export default function ContactPage() {
           <SectionHeading
             eyebrow="Find us"
             title="Goregaon West, Mumbai"
-            blurb="A short walk from Ram Mandir signal on Swami Vivekananda Road — easy to reach from the Western Express Highway and Goregaon station."
+            blurb="A short walk from Ram Mandir signal on Swami Vivekananda Road, easy to reach from the Western Express Highway and Goregaon station."
             action={{ label: "Get directions", href: `https://www.google.com/maps/search/?api=1&query=${company.address.mapQuery}` }}
           />
           <Reveal className="mt-8 grid gap-3 lg:grid-cols-[1.4fr_1fr]">
             <div className="overflow-hidden rounded-lg border border-line">
+              {/* The embed is always a light map. In dark mode it is inverted so it
+                  does not punch a white hole in the page; in light mode it is left
+                  alone. `invert`/`hue-rotate` on a map is the usual, readable recipe. */}
               <iframe
                 title="Map of Sam Infosystems office in Goregaon West, Mumbai"
                 src={`https://www.google.com/maps?q=${company.address.mapQuery}&output=embed`}
@@ -189,11 +192,11 @@ export default function ContactPage() {
                 height="380"
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                className="block h-[320px] w-full border-0 grayscale sm:h-[360px]"
+                className="map-embed block h-[320px] w-full border-0 sm:h-[360px]"
               />
             </div>
             <div className="relative overflow-hidden rounded-lg border border-line bg-ink-900">
-              <Image
+              <ThemedImage
                 src="/images/contact-globe.webp"
                 alt="Network arc connecting Mumbai to international locations"
                 width={1400}

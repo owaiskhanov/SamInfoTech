@@ -1,7 +1,7 @@
 /**
  * The Sam Infosystems monogram.
  *
- * A flat hexagon with a thin "S" cut through it — no gradients, no glows,
+ * A flat hexagon with a thin "S" cut through it. No gradients, no glows,
  * single accent colour so it reads at 16px and scales to any size.
  * Pure `currentColor`, so it inherits text colour in any context.
  */

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ThemedImage } from "@/components/ThemedImage";
 import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Icon } from "@/components/Icon";
@@ -8,12 +8,12 @@ import { QuoteForm } from "@/components/QuoteForm";
 import { about, company } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "About Us — IT Partner Since 2000",
+  title: "About Us | IT Partner Since 2000",
   description:
     "Sam Infosystems Pvt Ltd, formerly SAM INFOTECH, was founded in 2000 as an IT solutions provider focused on software and cloud. Our mission and vision.",
   alternates: { canonical: "/about-us" },
   openGraph: {
-    title: "About Sam Infosystems — a quarter century of IT partnerships",
+    title: "About Sam Infosystems: a quarter century of IT partnerships",
     description:
       "Founded in 2000 in Mumbai. Software, cloud and security solutions delivered through long-term partnerships.",
     images: ["/social-share.jpg"],
@@ -29,7 +29,7 @@ const timeline = [
   {
     year: "2002–2012",
     title: "Enterprise platforms, delivered locally",
-    body: "Building deep practice in cloud platforms, ERP and design software — bringing global platforms to Indian businesses with local accountability.",
+    body: "Building deep practice in cloud platforms, ERP and design software, bringing global platforms to Indian businesses with local accountability.",
   },
   {
     year: "2013–2020",
@@ -44,7 +44,7 @@ const timeline = [
   {
     year: "Today",
     title: "22 offerings, one partner",
-    body: "From cloud infrastructure and migration to 24×7 security management, IT consultancy and training — delivered by one accountable team.",
+    body: "From cloud infrastructure and migration to 24×7 security management, IT consultancy and training, delivered by one accountable team.",
   },
 ];
 
@@ -80,7 +80,7 @@ export default function AboutPage() {
 
             <Reveal className="flex flex-col gap-3">
               <div className="overflow-hidden rounded-lg border border-line">
-                <Image
+                <ThemedImage
                   src="/images/about-team.webp"
                   alt="Sam Infosystems team collaborating in their Mumbai office"
                   width={1408}
@@ -174,7 +174,7 @@ export default function AboutPage() {
             <SectionHeading
               eyebrow="Our journey"
               title="From SAM INFOTECH to Sam Infosystems"
-              blurb="A steady accumulation of capability — and of clients who stayed."
+              blurb="A steady accumulation of capability, and of clients who stayed."
             />
           </Reveal>
           <ol className="mt-9 border-l border-line">
@@ -208,7 +208,7 @@ export default function AboutPage() {
                 <SectionHeading
                   eyebrow="Get a free quote"
                   title="Please fill this form and we'll get back to you as soon as possible!"
-                  blurb="Prefer to talk? Call us during business hours — a real engineer answers."
+                  blurb="Prefer to talk? Call us during business hours. A real engineer answers."
                 />
               </Reveal>
               <div className="mt-7 flex flex-col gap-2.5">

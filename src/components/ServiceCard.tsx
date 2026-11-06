@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "./Icon";
-import { BrandLogo, hasBrandMark } from "./BrandLogo";
+import { hasBrandMark } from "@/lib/brand-logo";
+import { ThemeBrandMarkBase as ThemeBrandMark } from "@/components/ThemeBrandMarkBase";
 import type { Item } from "@/lib/site";
 
 export function ServiceCard({ item }: { item: Item }) {
@@ -12,7 +13,7 @@ export function ServiceCard({ item }: { item: Item }) {
       <div className="flex items-start justify-between gap-3">
         <span className="tile flex h-11 w-11 items-center justify-center rounded-md text-mist-200">
           {hasBrandMark(item.icon) ? (
-            <BrandLogo name={item.icon} size={22} />
+            <ThemeBrandMark name={item.icon} size={22} />
           ) : (
             <Icon name={item.icon} size={20} />
           )}
@@ -43,7 +44,7 @@ export function ServiceRow({ item }: { item: Item }) {
     >
       <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded border border-line text-mist-300">
         {hasBrandMark(item.icon) ? (
-          <BrandLogo name={item.icon} size={17} />
+          <ThemeBrandMark name={item.icon} size={17} />
         ) : (
           <Icon name={item.icon} size={17} />
         )}

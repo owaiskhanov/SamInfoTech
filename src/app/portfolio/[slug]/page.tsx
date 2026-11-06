@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Icon } from "@/components/Icon";
-import { BrandLogo, hasBrandMark } from "@/components/BrandLogo";
+import { hasBrandMark } from "@/lib/brand-logo";
+import { ThemeBrandMarkBase as ThemeBrandMark } from "@/components/ThemeBrandMarkBase";
 import { QuoteForm } from "@/components/QuoteForm";
 import { ServiceCard } from "@/components/ServiceCard";
 import { Reveal } from "@/components/Reveal";
@@ -30,7 +31,7 @@ export async function generateMetadata({
       : item.category === "security"
         ? "Security Services"
         : "IT Solutions";
-  const withDescriptor = `${item.name} — ${descriptor} | Sam Infosystems`;
+  const withDescriptor = `${item.name} - ${descriptor} | Sam Infosystems`;
   const title =
     withDescriptor.length <= 65 ? withDescriptor : `${item.name} | Sam Infosystems`;
 
@@ -95,7 +96,7 @@ export default async function PortfolioPage({ params }: { params: Promise<Params
               <div className="flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-md border border-line bg-ink-900 text-mist-200">
                   {hasBrandMark(item.icon) ? (
-                    <BrandLogo name={item.icon} size={22} />
+                    <ThemeBrandMark name={item.icon} size={22} />
                   ) : (
                     <Icon name={item.icon} size={20} />
                   )}
@@ -166,7 +167,7 @@ export default async function PortfolioPage({ params }: { params: Promise<Params
               </dl>
               <div className="mt-4 rounded border border-line bg-ink-950 p-4">
                 <p className="text-[0.76rem] font-light leading-relaxed text-mist-400">
-                  Speak to a specialist before you commit — we'll tell you what's worth doing and in
+                  Speak to a specialist before you commit. We'll tell you what's worth doing and in
                   what order.
                 </p>
                 <a
@@ -195,7 +196,7 @@ export default async function PortfolioPage({ params }: { params: Promise<Params
                 <p>
                   Sam Infosystems has delivered {item.name.toLowerCase()} since 2000. Every
                   engagement starts with an honest assessment of what you already run, then a scoped
-                  plan with clear ownership — and the same team stays on the account afterwards.
+                  plan with clear ownership, and the same team stays on the account afterwards.
                 </p>
               </div>
 
@@ -204,7 +205,7 @@ export default async function PortfolioPage({ params }: { params: Promise<Params
                   {
                     icon: "compass",
                     title: "Assess",
-                    body: "Current state, gaps and risk ranked by business impact — not by what's easiest to sell.",
+                    body: "Current state, gaps and risk ranked by business impact, not by what's easiest to sell.",
                   },
                   {
                     icon: "spark",

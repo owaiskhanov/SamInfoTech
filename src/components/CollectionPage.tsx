@@ -76,7 +76,7 @@ export function CollectionPage({ category }: { category: ItemCategory }) {
                 Not sure which of these you need?
               </h2>
               <p className="mt-2 text-[0.86rem] font-light text-mist-400">
-                Tell us what you're running today. We'll tell you honestly what's worth changing —
+                Tell us what you're running today. We'll tell you honestly what's worth changing,
                 and what isn't.
               </p>
             </div>

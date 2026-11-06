@@ -24,10 +24,10 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
       `${data.get("message") ?? ""}`,
     ].join("\n");
 
-    // The marketing form hands off to the sales inbox — no backend required.
+    // The marketing form hands off to the sales inbox. No backend required.
     window.setTimeout(() => {
       window.location.href = `mailto:sales@saminfosystems.com?subject=${encodeURIComponent(
-        `Quote request — ${data.get("company") || data.get("name") || "Website"}`,
+        `Quote request: ${data.get("company") || data.get("name") || "Website"}`,
       )}&body=${encodeURIComponent(body)}`;
       setStatus("sent");
       form.reset();
@@ -141,7 +141,7 @@ export function QuoteForm({ compact = false }: { compact?: boolean }) {
 
       <p aria-live="polite" className="min-h-[1.1rem] text-center text-[0.76rem] text-mist-500">
         {status === "sent"
-          ? "Thanks — your email client is opening with the details. We reply within one business day."
+          ? "Thanks. Your email client is opening with the details. We reply within one business day."
           : "We reply within one business day. No spam, ever."}
       </p>
     </form>

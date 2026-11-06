@@ -2,7 +2,7 @@
  * Official brand marks.
  *
  * Path data is taken from Simple Icons (https://simpleicons.org), released under
- * CC0 1.0 — free to use, no attribution required, and safe to bundle. Each mark is a
+ * CC0 1.0: free to use, no attribution required, and safe to bundle. Each mark is a
  * single monochrome path drawn on a 24x24 grid, so it inherits `currentColor` and
  * stays crisp at any size. `hex` carries the brand's own colour.
  *
@@ -72,17 +72,17 @@ export const brandMarks = {
 
 export type BrandKey = keyof typeof brandMarks;
 
-/* ————————————————————————————————————————————————————————————————
+/* -----------------------------------------------------------------
  * Marks drawn by hand for this project (24×24 grid).
- * These are simplified, original representations — not the trademarked
- * artwork — built from primitives so they read clearly at small sizes.
+ * These are simplified, original representations, not the trademarked
+ * artwork, built from primitives so they read clearly at small sizes.
  * `body` holds raw SVG markup so a mark can mix fills and strokes.
- * ———————————————————————————————————————————————————————————————— */
+ * ----------------------------------------------------------------- */
 
 export type Handmark = { title: string; hex: string; body: string };
 
 export const handmadeMarks = {
-  /** Google Workspace — the four-pane glyph, top-right pane stepped. */
+  /** Google Workspace: the four-pane glyph, top-right pane stepped. */
   googleworkspace: {
     title: "Google Workspace",
     hex: "#4285F4",
@@ -93,7 +93,7 @@ export const handmadeMarks = {
       <path d="M13 2.8h8.2v5.6H13z"/>
     `,
   },
-  /** Microsoft 365 — the four-square Microsoft grid. */
+  /** Microsoft 365: the four-square Microsoft grid. */
   microsoft365: {
     title: "Microsoft 365",
     hex: "#D83B01",
@@ -104,7 +104,7 @@ export const handmadeMarks = {
       <path d="M12.8 12.8h8.6v8.6h-8.6z"/>
     `,
   },
-  /** Sophos — the concentric shield. */
+  /** Sophos: the concentric shield. */
   sophos: {
     title: "Sophos",
     hex: "#0F529E",
@@ -113,7 +113,7 @@ export const handmadeMarks = {
       <path d="M12 7.1a4.9 4.9 0 1 0 0 9.8 4.9 4.9 0 0 0 0-9.8Zm0 2.1a2.8 2.8 0 1 1 0 5.6 2.8 2.8 0 0 1 0-5.6Z"/>
     `,
   },
-  /** Tally ERP.9 — a bold T over ledger rules. */
+  /** Tally ERP.9: a bold T over ledger rules. */
   tally: {
     title: "Tally ERP.9",
     hex: "#D0021B",
@@ -126,7 +126,7 @@ export const handmadeMarks = {
       <path d="M16 16.6h3.6v1.7H16z"/>
     `,
   },
-  /** HR Solutions — a person beside a confirmation tick. */
+  /** HR Solutions: a person beside a confirmation tick. */
   hr: {
     title: "HR Solutions",
     hex: "#7C5CFC",

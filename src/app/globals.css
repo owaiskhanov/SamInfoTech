@@ -2,17 +2,15 @@
 @import "@fontsource-variable/inter-tight/wght.css";
 @import "@fontsource-variable/inter/wght.css";
 
-/* ————————————————————————————————————————————————————————————————
-   FLAT DESIGN SYSTEM
+/* FLAT DESIGN SYSTEM
    No gradients anywhere. Depth comes from hairlines, flat tints and
-   generous space — not from glows or blends.
-   ———————————————————————————————————————————————————————————————— */
+   generous space, not from glows or blends. */
 
 @theme {
   --font-display: "Inter Tight Variable", ui-sans-serif, system-ui, sans-serif;
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
 
-  /* surfaces — flat, very dark navy */
+  /* surfaces: flat, very dark navy */
   --color-ink-950: #05070c;
   --color-ink-900: #080b12;
   --color-ink-850: #0b0f17;
@@ -20,7 +18,7 @@
   --color-ink-700: #141a25;
   --color-ink-600: #1b2230;
 
-  /* accent — one clean cyan, no blending */
+  /* accent: one clean cyan, no blending */
   --color-brand-100: #d6f6fb;
   --color-brand-200: #a8ecf5;
   --color-brand-300: #6fdcea;
@@ -38,12 +36,128 @@
   --color-mist-200: #cdd5e1;
   --color-mist-300: #aab5c6;
   --color-mist-400: #8590a3;
-  --color-mist-500: #66707f;
-  --color-mist-600: #4c5563;
+  --color-mist-500: #7b8798;
+  --color-mist-600: #8590a3;
 
   /* flat, low-contrast hairlines */
   --color-line: #1a212c;
   --color-line-strong: #262f3d;
+
+  /* the few tokens that are not a simple light/dark swap */
+  --color-accent-on: #04222a;
+  --color-tint: rgb(255 255 255 / 0.035);
+  --color-track: #1e2732;
+  --color-track-hover: #2b3542;
+}
+
+/* --------------------------------------------------------------------------
+   DARK THEME (default). `:root` carries the class because the inline script in
+   layout.tsx sets it before first paint, so there is never a flash of the
+   wrong theme. Every colour below is also declared as a real theme token, which
+   is what lets components keep saying `bg-ink-900` and get a light value in
+   light mode without a single class change.
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: dark;
+  --color-ink-950: #05070c;
+  --color-ink-900: #080b12;
+  --color-ink-850: #0b0f17;
+  --color-ink-800: #0e131c;
+  --color-ink-700: #141a25;
+  --color-ink-600: #1b2230;
+  --color-mist-50: #f6f8fb;
+  --color-mist-100: #e8ecf3;
+  --color-mist-200: #cdd5e1;
+  --color-mist-300: #aab5c6;
+  --color-mist-400: #8590a3;
+  --color-mist-500: #7b8798;
+  --color-mist-600: #8590a3;
+  --color-line: #1a212c;
+  --color-line-strong: #262f3d;
+  --color-brand-100: #d6f6fb;
+  --color-brand-200: #a8ecf5;
+  --color-brand-300: #6fdcea;
+  --color-brand-400: #35c6dc;
+  --color-brand-500: #17a8be;
+  --color-brand-600: #0f869a;
+  /* Brand marks read their colour from here, so a theme change is pure CSS and
+     no brand logo needs a client component or a hydration pass. */
+  --mark-azure: #0078d4;
+  --mark-aws: #ff9900;
+  --mark-microsoft365: #d83b01;
+  --mark-adobe: #da1f26;
+  --mark-tally: #d0021b;
+  --mark-coreldraw: #f2f4f7;
+  --mark-sophos: #4c8cf0;
+  --mark-fortinet: #ee3124;
+  --mark-autocad: #e51050;
+  --mark-googleworkspace: #4285f4;
+  --mark-hr: #7c5cfc;
+  --color-accent-on: #04222a;
+  --color-tint: rgb(255 255 255 / 0.035);
+  --color-track: #1e2732;
+  --color-track-hover: #2b3542;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT THEME. Not an inverted dark theme: the neutral ramp is rebuilt as
+   cool grey paper, the accent ramp darkens so cyan stays legible as *text*,
+   and the product photography gets its own print-like asset set (see
+   scripts/build-assets.mjs). Contrast checked against WCAG AA.
+   -------------------------------------------------------------------------- */
+:root.light {
+  color-scheme: light;
+  --color-ink-950: #f6f7f9;
+  --color-ink-900: #ffffff;
+  --color-ink-850: #f1f3f7;
+  --color-ink-800: #e8ecf2;
+  --color-ink-700: #dde2ea;
+  --color-ink-600: #cdd4de;
+  --color-mist-50: #0a0f16;
+  --color-mist-100: #161d28;
+  --color-mist-200: #28323f;
+  --color-mist-300: #3d4857;
+  --color-mist-400: #56606f;
+  --color-mist-500: #56606f;
+  --color-mist-600: #616b7a;
+  --color-line: #e4e8ef;
+  --color-line-strong: #cfd6e1;
+  --color-brand-100: #e2f5f9;
+  --color-brand-200: #0a5b6a;
+  --color-brand-300: #0b7285;
+  --color-brand-400: #0c7a8b;
+  --color-brand-500: #095c6b;
+  --color-brand-600: #063f4a;
+  /* Same hues, values corrected for paper: CorelDRAW ships a white mark and
+     Adobe a red tuned for black packaging, neither survives a white tile. */
+  --mark-azure: #0078d4;
+  --mark-aws: #b05f00;
+  --mark-microsoft365: #bd3500;
+  --mark-adobe: #c2181f;
+  --mark-tally: #b8122a;
+  --mark-coreldraw: #16232f;
+  --mark-sophos: #0f529e;
+  --mark-fortinet: #d92b20;
+  --mark-autocad: #cf0e47;
+  --mark-googleworkspace: #2b6fd4;
+  --mark-hr: #5b3fd6;
+  --color-accent-on: #f7fdff;
+  --color-tint: rgb(10 15 22 / 0.035);
+  --color-track: #d3dae4;
+  --color-track-hover: #bcc6d3;
+}
+
+/* Theme change: only surfaces that own their own transition fade, so the blob
+   reveal / blur entrance keeps its own opacity-filter-transform timeline.
+   (A universal transition rule here would out-rank `.reveal` and kill it.) */
+:root.theme-ready body,
+:root.theme-ready .card,
+:root.theme-ready .tile,
+:root.theme-ready .btn,
+:root.theme-ready .field {
+  transition-property: background-color, border-color, color;
+  transition-duration: 240ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
@@ -83,7 +197,7 @@
 
   ::selection {
     background: var(--color-brand-300);
-    color: var(--color-ink-950);
+    color: var(--color-accent-on);
   }
 
   :focus-visible {
@@ -94,11 +208,11 @@
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: var(--color-ink-950); }
   ::-webkit-scrollbar-thumb {
-    background: #1e2732;
+    background: var(--color-track);
     border-radius: 999px;
     border: 2px solid var(--color-ink-950);
   }
-  ::-webkit-scrollbar-thumb:hover { background: #2b3542; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-track-hover); }
 
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
@@ -110,7 +224,7 @@
   }
 }
 
-/* ————————————————————————— utilities ————————————————————————— */
+/* utilities */
 
 @utility container-x {
   width: 100%;
@@ -161,13 +275,14 @@
 
   .btn-primary {
     background-color: var(--color-brand-300);
-    color: #04222a;
+    color: var(--color-accent-on);
     border: 1px solid var(--color-brand-300);
   }
   .btn-primary:hover {
     background-color: var(--color-brand-200);
     border-color: var(--color-brand-200);
   }
+  :root.light .btn-primary:hover { color: #f7fdff; }
 
   .btn-ghost {
     color: var(--color-mist-100);
@@ -178,6 +293,7 @@
     border-color: var(--color-mist-500);
     background-color: var(--color-ink-800);
   }
+  :root.light .btn-ghost { border-color: var(--color-line-strong); }
 
   .btn-quiet {
     color: var(--color-mist-300);
@@ -254,12 +370,22 @@
   }
 }
 
-/* ————————————————————————— decorative ————————————————————————— */
+/* decorative */
+
+/* The Google Maps embed is light-only, so dark mode flips its values and
+   restores the hue. Light mode gets the untouched map. */
+.map-embed { filter: none; }
+:root:not(.light) .map-embed {
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.55) brightness(0.95);
+}
+
+/* Light mode: the accent reads as ink on paper, so keep hairline dots calm */
+:root.light .nav-link::after { background-color: var(--color-brand-400); }
 
 /* Flat tint for logo tiles (single colour, no blend) */
-.tint-soft { background-color: rgb(255 255 255 / 0.035); }
+.tint-soft { background-color: var(--color-tint); }
 
-/* ————————————————————————— motion ————————————————————————— */
+/* motion */
 
 /* Entrance: fade in from a blur, lift slightly. No scale, no bounce. */
 @keyframes blur-in {
@@ -317,13 +443,18 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; filter: none; transform: none; }
   .stagger > *, .rise { animation: none; opacity: 1; filter: none; transform: none; }
+  :root.theme-ready body, :root.theme-ready .card, :root.theme-ready .tile,
+  :root.theme-ready .btn, :root.theme-ready .field { transition-duration: 0.001ms; }
 }
 
+/* The theme-aware images are swapped from React, so without scripting the
+   light-theme twin would never load and text would sit on dark artwork.
+   Same rule the reveal animation already follows: fall back to plain dark. */
 @media (scripting: none) {
-  .reveal { opacity: 1; filter: none; transform: none; }
+  :root { color-scheme: dark; --color-ink-950: #05070c; --color-ink-900: #080b12; }
 }
 
-/* ————————————————————————— marquee ————————————————————————— */
+/* marquee */
 @keyframes marquee {
   from { transform: translateX(0); }
   to { transform: translateX(-50%); }

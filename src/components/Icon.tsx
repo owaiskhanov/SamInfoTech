@@ -4,7 +4,7 @@ type IconProps = SVGProps<SVGSVGElement> & { name: string; size?: number };
 
 /**
  * A hand-drawn, single-weight line icon set (24px grid) plus geometric
- * product marks. Everything is original SVG — no vendor logo files are
+ * product marks. Everything is original SVG: no vendor logo files are
  * bundled, which keeps the site trademark-clean and lightweight.
  */
 export function Icon({ name, size = 24, ...props }: IconProps) {
@@ -31,7 +31,7 @@ export function Icon({ name, size = 24, ...props }: IconProps) {
 const S = (d: string, key?: string | number) => <path key={key} d={d} />;
 
 const icons: Record<string, React.ReactNode> = {
-  // ————— concept icons —————
+  // ----- concept icons -----
   cloud: (
     <>
       {S("M7.5 18.5h9.2a3.3 3.3 0 0 0 .3-6.6 5.4 5.4 0 0 0-10.4-1.4A3.9 3.9 0 0 0 7.5 18.5Z")}
@@ -214,7 +214,7 @@ const icons: Record<string, React.ReactNode> = {
     </>
   ),
 
-  // ————— geometric product marks —————
+  // ----- geometric product marks -----
   azure: (
     <>
       {S("M9.4 3.6 4.2 16.2h4.6l1.4-3.4h4.6l1.5 3.4h3.3L15 3.6H9.4Z")}

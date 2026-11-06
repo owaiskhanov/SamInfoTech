@@ -37,7 +37,7 @@ export function NewsletterForm() {
       </div>
       <p aria-live="polite" className="mt-3 text-[0.74rem] leading-relaxed text-mist-500">
         {done
-          ? "You're on the list — your promo code is on its way to your inbox."
+          ? "You're on the list. Your promo code is on its way to your inbox."
           : "Offer valid only for new email subscribers. One email, then you choose."}
       </p>
     </form>

@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Image from "next/image";
+import { ThemedImage } from "@/components/ThemedImage";
 import Link from "next/link";
 import { HeroSlider } from "@/components/HeroSlider";
 import { FilterableGrid } from "@/components/FilterableGrid";
 import { ServiceCard, ServiceRow } from "@/components/ServiceCard";
-import { BrandLogo, hasBrandMark } from "@/components/BrandLogo";
+import { hasBrandMark } from "@/lib/brand-logo";
+import { ThemeBrandMarkBase as ThemeBrandMark } from "@/components/ThemeBrandMarkBase";
 import { QuoteForm } from "@/components/QuoteForm";
 import { NewsletterForm } from "@/components/NewsletterForm";
 import { Reveal } from "@/components/Reveal";
@@ -13,7 +14,7 @@ import { SectionHeading } from "@/components/ui";
 import { about, byCategory, company, offer, quote } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: { absolute: "Sam Infosystems — IT Solutions, Cloud & Security, Mumbai" },
+  title: { absolute: "Sam Infosystems | IT Solutions, Cloud & Security, Mumbai" },
   description:
     "Security and cloud solutions provider with a strong focus on software. Architecting, deploying and supporting enterprise IT from Mumbai since 2000.",
   alternates: { canonical: "/" },
@@ -28,7 +29,7 @@ export default function HomePage() {
     <>
       <HeroSlider />
 
-      {/* ————————————————— platforms strip ————————————————— */}
+      {/* platforms strip */}
       <section aria-label="Platforms we deliver" className="border-b border-line bg-ink-900">
         <div className="container-x py-8">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:gap-10">
@@ -44,7 +45,7 @@ export default function HomePage() {
                   >
                     <span className="shrink-0">
                       {hasBrandMark(p.icon) ? (
-                        <BrandLogo name={p.icon} size={19} />
+                        <ThemeBrandMark name={p.icon} size={19} />
                       ) : (
                         <Icon name={p.icon} size={19} />
                       )}
@@ -58,7 +59,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— about ————————————————— */}
+      {/* about */}
       <section className="border-b border-line" id="about">
         <div className="container-x py-16 lg:py-20">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
@@ -122,7 +123,7 @@ export default function HomePage() {
 
             <Reveal delay={120} className="flex flex-col gap-4">
               <div className="overflow-hidden rounded-lg border border-line">
-                <Image
+                <ThemedImage
                   src="/images/about-team.webp"
                   alt="Sam Infosystems consultants reviewing an enterprise architecture plan in Mumbai"
                   width={1408}
@@ -145,7 +146,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— products ————————————————— */}
+      {/* products */}
       <section id="products" className="border-b border-line bg-ink-900">
         <div className="container-x py-16 lg:py-20">
           <Reveal>
@@ -153,13 +154,13 @@ export default function HomePage() {
               eyebrow="Our products"
               title={
                 <>
-                  Your products, protected —{" "}
+                  Your products, protected.{" "}
                   <span className="text-mist-400">
                     every platform secured with advanced encryption and privacy measures.
                   </span>
                 </>
               }
-              blurb="We license, deploy and support the enterprise platforms your business already runs on — with local accountability and one number to call."
+              blurb="We license, deploy and support the enterprise platforms your business already runs on, with local accountability and one number to call."
               action={{ label: "All products", href: "/products" }}
             />
           </Reveal>
@@ -176,13 +177,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— security ————————————————— */}
+      {/* security */}
       <section id="security" className="border-b border-line">
         <div className="container-x py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-14">
             <Reveal className="order-2 flex flex-col gap-4 lg:order-1">
               <div className="overflow-hidden rounded-lg border border-line">
-                <Image
+                <ThemedImage
                   src="/images/security-soc.webp"
                   alt="Security operations centre monitoring networks in real time"
                   width={1408}
@@ -209,7 +210,7 @@ export default function HomePage() {
                   Security
                 </p>
                 <h2 className="mt-4 font-display text-[1.8rem] font-light leading-[1.12] tracking-[-0.03em] text-mist-50 sm:text-[2.15rem]">
-                  Ensuring the security of your digital portfolio —{" "}
+                  Ensuring the security of your digital portfolio.{" "}
                   <span className="text-brand-300">giving you peace of mind.</span>
                 </h2>
                 <p className="mt-4 text-[0.9rem] font-light leading-relaxed text-mist-400">
@@ -242,7 +243,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— solutions ————————————————— */}
+      {/* solutions */}
       <section className="border-b border-line bg-ink-900">
         <div className="container-x py-16 lg:py-20">
           <Reveal>
@@ -250,7 +251,7 @@ export default function HomePage() {
               eyebrow="Our solutions"
               title={
                 <>
-                  From cloud to consultancy —{" "}
+                  From cloud to consultancy:{" "}
                   <span className="text-mist-400">one accountable partner.</span>
                 </>
               }
@@ -268,7 +269,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— values ————————————————— */}
+      {/* values */}
       <section className="border-b border-line">
         <div className="container-x py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14">
@@ -307,7 +308,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— offer + quote ————————————————— */}
+      {/* offer + quote */}
       <section id="quote" className="border-b border-line bg-ink-900">
         <div className="container-x py-16 lg:py-20">
           <div className="grid gap-10 lg:grid-cols-[1fr_1fr] lg:gap-14">
@@ -320,7 +321,7 @@ export default function HomePage() {
                   Sign up to receive the latest offers and news in industry.
                 </h2>
                 <p className="mt-2.5 text-[0.86rem] font-light leading-relaxed text-mist-400">
-                  Enter your email address and receive 15% off your first order — a promo code lands
+                  Enter your email address and receive 15% off your first order, and a promo code lands
                   straight in your inbox.
                 </p>
                 <div className="mt-5">
@@ -382,13 +383,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ————————————————— CTA ————————————————— */}
+      {/* CTA */}
       <section>
         <div className="container-x py-14 lg:py-16">
           <Reveal className="flex flex-col gap-6 rounded-lg border border-line bg-ink-900 p-6 sm:p-9 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <h2 className="max-w-lg font-display text-[1.4rem] font-light leading-tight tracking-[-0.025em] text-mist-50 sm:text-[1.7rem]">
-                Ready to modernise your IT —{" "}
+                Ready to modernise your IT.{" "}
                 <span className="text-brand-300">without the disruption?</span>
               </h2>
               <p className="mt-2.5 max-w-md text-[0.86rem] font-light text-mist-400">

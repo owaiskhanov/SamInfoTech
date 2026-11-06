@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { company, nav } from "@/lib/site";
 import { Icon } from "./Icon";
 import { Wordmark } from "./Logo";
+import { ThemeToggle } from "./ThemeToggle";
 
 export function Header() {
   const pathname = usePathname();
@@ -37,7 +38,7 @@ export function Header() {
 
   return (
     <>
-      {/* utility strip — flat, hairline separated */}
+      {/* utility strip: flat, hairline separated */}
       <div className="hidden border-b border-line bg-ink-950 md:block">
         <div className="container-x flex h-9 items-center justify-between text-[0.74rem] font-light text-mist-500">
           <div className="flex items-center gap-5">
@@ -83,8 +84,8 @@ export function Header() {
           scrolled ? "border-line" : "border-transparent"
         }`}
       >
-        <div className="container-x flex h-16 items-center justify-between gap-4">
-          <Link href="/" aria-label="Sam Infosystems — Home" className="shrink-0">
+        <div className="container-x flex h-16 items-center justify-between gap-2 sm:gap-4">
+          <Link href="/" aria-label="Sam Infosystems, Home" className="shrink-0">
             <Wordmark />
           </Link>
 
@@ -132,8 +133,12 @@ export function Header() {
             )}
           </nav>
 
-          <div className="hidden lg:flex">
-            <Link href="/contact-us" className="btn btn-primary !py-2 !text-[0.82rem]">
+          <div className="ml-auto flex items-center gap-2.5 lg:ml-0">
+            <ThemeToggle />
+            <Link
+              href="/contact-us"
+              className="btn btn-primary hidden !py-2 !text-[0.82rem] lg:inline-flex"
+            >
               Get a quote
             </Link>
           </div>
@@ -144,7 +149,7 @@ export function Header() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
-            className="flex h-10 w-10 items-center justify-center rounded border border-line text-mist-100 lg:hidden"
+            className="flex h-10 w-10 shrink-0 items-center justify-center rounded border border-line text-mist-100 lg:hidden"
           >
             <Icon name={open ? "close" : "menu"} size={18} />
           </button>
@@ -219,6 +224,13 @@ export function Header() {
           <Link href="/contact-us" className="btn btn-primary mt-5 w-full">
             Get a free quote
           </Link>
+
+          <div className="mt-6 flex items-center justify-between border-t border-line pt-4">
+            <span className="text-[0.72rem] font-medium uppercase tracking-[0.16em] text-mist-500">
+              Appearance
+            </span>
+            <ThemeToggle />
+          </div>
 
           <div className="mt-6 space-y-2.5 text-[0.82rem] font-light text-mist-400">
             <a href={company.phoneHref} className="flex items-center gap-2.5 hover:text-mist-100">

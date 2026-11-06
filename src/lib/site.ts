@@ -1,6 +1,6 @@
 /**
  * Single source of truth for every piece of copy extracted from
- * https://saminfosystems.com — used by the pages, the sitemap,
+ * https://saminfosystems.com. Used by the pages, the sitemap,
  * the OG-image generator and the JSON-LD structured data.
  */
 
@@ -54,7 +54,7 @@ export type Item = {
 };
 
 export const items: Item[] = [
-  // ——————————————————————————— SOLUTIONS ———————————————————————————
+  // ----------------------------- SOLUTIONS -----------------------------
   {
     slug: "cloud-solutions",
     name: "Cloud Solutions",
@@ -164,7 +164,7 @@ export const items: Item[] = [
     ],
   },
 
-  // ——————————————————————————— SECURITY ———————————————————————————
+  // ----------------------------- SECURITY -----------------------------
   {
     slug: "mobile-device-management-mdm",
     name: "Mobile Device Management (MDM)",
@@ -193,7 +193,7 @@ export const items: Item[] = [
     excerpt:
       "Safeguard your organization’s network and data with our advanced Endpoint Security solutions.",
     body:
-      "Safeguard your organization’s network and data with our advanced Endpoint Security solutions. Our experts provide comprehensive protection against cyber threats by securing all endpoints, including desktops, laptops, mobile devices, and servers. With real-time threat detection, automated patch management, and robust encryption, our endpoint security ensures seamless protection and compliance across your network. Strengthen your defense perimeter and maintain operational continuity with our reliable and proactive endpoint security solutions—ensuring your business stays secure, always.",
+      "Safeguard your organization’s network and data with our advanced Endpoint Security solutions. Our experts provide comprehensive protection against cyber threats by securing all endpoints, including desktops, laptops, mobile devices, and servers. With real-time threat detection, automated patch management, and robust encryption, our endpoint security ensures seamless protection and compliance across your network. Strengthen your defense perimeter and maintain operational continuity with our reliable and proactive endpoint security solutions, ensuring your business stays secure, always.",
     highlights: [
       "Every endpoint: desktops, laptops, mobiles, servers",
       "Real-time threat detection",
@@ -211,7 +211,7 @@ export const items: Item[] = [
     excerpt:
       "Secure your organization with our premier Cybersecurity services. Our expert team will protect your systems, networks, and data from cyber threats.",
     body:
-      "Secure your organization with our premier Cybersecurity services. Our expert team will protect your systems, networks, and data from cyber threats, ensuring compliance and safeguarding sensitive information. With advanced threat detection, real-time monitoring, and robust defence mechanisms, our cybersecurity solutions enhance your security posture and operational efficiency. Protect your business with our top-tier cybersecurity services—your security is our priority.",
+      "Secure your organization with our premier Cybersecurity services. Our expert team will protect your systems, networks, and data from cyber threats, ensuring compliance and safeguarding sensitive information. With advanced threat detection, real-time monitoring, and robust defence mechanisms, our cybersecurity solutions enhance your security posture and operational efficiency. Protect your business with our top-tier cybersecurity services, your security is our priority.",
     highlights: [
       "Systems, networks and data protected",
       "Advanced threat detection",
@@ -229,7 +229,7 @@ export const items: Item[] = [
     excerpt:
       "Enhance your organization’s security with our advanced Firewall services. Our expert team will monitor and control network traffic to block threats.",
     body:
-      "Enhance your organization’s security with our advanced Firewall services. Our expert team will monitor and control network traffic to block threats, prevent hacking, and stop virus attacks. Our firewalls also protect against spyware and ensure data privacy, providing a robust defence against cyber threats. Regular firewall management not only strengthens your security posture but also ensures compliance with regulatory standards and effective risk management. Safeguard your sensitive information with our top-notch firewall services—your security is our priority.",
+      "Enhance your organization’s security with our advanced Firewall services. Our expert team will monitor and control network traffic to block threats, prevent hacking, and stop virus attacks. Our firewalls also protect against spyware and ensure data privacy, providing a robust defence against cyber threats. Regular firewall management not only strengthens your security posture but also ensures compliance with regulatory standards and effective risk management. Safeguard your sensitive information with our top-notch firewall services, your security is our priority.",
     highlights: [
       "Network traffic monitoring and control",
       "Blocks threats, hacking and virus attacks",
@@ -247,7 +247,7 @@ export const items: Item[] = [
     excerpt:
       "Boost your organization’s security with our top-notch Vulnerability Assessment and Penetration Testing (VAPT) services.",
     body:
-      "Boost your organization’s security with our top-notch Vulnerability Assessment and Penetration Testing (VAPT) services. We identify and exploit vulnerabilities in your systems, providing detailed reports and actionable recommendations. Regular VAPT ensures enhanced security, regulatory compliance, and effective risk management. Protect your sensitive information from cyber threats with our expert VAPT services—your security is our priority.",
+      "Boost your organization’s security with our top-notch Vulnerability Assessment and Penetration Testing (VAPT) services. We identify and exploit vulnerabilities in your systems, providing detailed reports and actionable recommendations. Regular VAPT ensures enhanced security, regulatory compliance, and effective risk management. Protect your sensitive information from cyber threats with our expert VAPT services, your security is our priority.",
     highlights: [
       "Vulnerability assessment and penetration testing",
       "Real-world exploitation of weaknesses",
@@ -256,7 +256,7 @@ export const items: Item[] = [
     ],
   },
 
-  // ——————————————————————————— PRODUCTS ———————————————————————————
+  // ----------------------------- PRODUCTS -----------------------------
   {
     slug: "microsoft-azure",
     name: "Microsoft Azure",
@@ -477,7 +477,7 @@ export const categories = [
     title: "Products we deliver and support",
     label: "Products",
     blurb:
-      "Licensed, deployed and supported by Sam Infosystems — the platforms your business already trusts.",
+      "Licensed, deployed and supported by Sam Infosystems: the platforms your business already trusts.",
   },
 ];
 
@@ -526,7 +526,7 @@ export const heroSlides = [
     titleAccent: "Provider",
     subtitle: "With a strong focus on software and security",
     body:
-      "Layered, continuously monitored defence across your networks, endpoints, devices and data — delivered by a team that has been doing it since 2000.",
+      "Layered, continuously monitored defence across your networks, endpoints, devices and data, delivered by a team that has been doing it since 2000.",
     stat: "24×7 monitoring & response",
     cta: { label: "Explore security", href: "/solutions#security" },
   },
@@ -536,7 +536,7 @@ export const heroSlides = [
     titleAccent: "Provider",
     subtitle: "With a strong focus on software and cloud technologies",
     body:
-      "Architect, migrate and operate cloud infrastructure built for high availability — Azure, AWS and Google Cloud, supported end to end by Sam Infosystems.",
+      "Architect, migrate and operate cloud infrastructure built for high availability: Azure, AWS and Google Cloud, supported end to end by Sam Infosystems.",
     stat: "Multi-cloud, single partner",
     cta: { label: "Explore cloud", href: "/solutions#solutions" },
   },
